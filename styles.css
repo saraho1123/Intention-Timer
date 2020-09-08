@@ -1,0 +1,42 @@
+/*
+Main background: #2B2733
+Text on main background: #CBC9CF
+Header, cards: #46424D
+Card shadow: #26222D
+Text on header and cards: #FFF
+Study: #B3FD78
+Meditate: #C278FD
+Exercise: #FD8078
+Error: #EFB7EC
+*/
+
+body {
+ font-family: 'Montserrat';
+ /* font-weight: 400; */
+ /* font-size: 20px; */
+ background: #2B2733;
+ color: #CBC9CF;
+ margin: 0;
+}
+
+header {
+  text-align: center;
+  background:  #46424D;
+  padding: 2px;
+  font-size: 15;
+}
+
+main {
+  display: flex;
+
+}
+
+.new-activity {
+  width: 60%;
+}
+
+.past-activities {
+  border-left: #46424D 3px solid;
+  height: 600px;
+  width: 40%;
+}
