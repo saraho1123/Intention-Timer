@@ -52,6 +52,13 @@ article {
   color: #CBC9CF;
   border: #CBC9CF 2px solid;
   border-radius: 7px;
+  outline:none;
+}
+
+.study-active {
+  color:#B3FD78;
+  border:#B3FD78 2px solid;
+  outline:none;
 }
 
 .cat-img {
