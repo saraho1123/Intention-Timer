@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Intention Timer</title>
+  </head>
+  <body>
+    <header>
+      <h2>INTENTION TIMER</h2>
+    </header>
+    <main>
+      <section class="new-activity">
+        <h3>New Activity</h3>
+        <div class="selection-box">
+          <h4>Select a category:</h3>
+          <article class="categories">
+            <button class="study cat-button" type="button" name="button">
+              <img class="study-img cat-img" src="./assets/study.svg" alt="">
+              <h4 class="cat-titles">Study</h4>
+            </button>
+            <button class="meditate cat-button" type="button" name="button">
+              <img class="meditate-img cat-img" src="./assets/meditate.svg" alt="">
+              <h4 class="cat-titles">Meditate</h4>
+            </button>
+            <button class="exercise cat-button" type="button" name="button">
+              <img class="exercise-img cat-img" src="./assets/exercise.svg" alt="">
+              <h4 class="cat-titles">Exercise</h4>
+            </button>
+          </article>
+          <article class="accomplish">
+            <h4>What would you like to accomplish during this time?</h4>
+            <input class"accomplish-input" type="text" name="" value="">
+          </article>
+          <article class="time">
+            <div class="time-section">
+              <h4>Minutes</h4>
+              <input class="minutes-input" type="text" name="" value="">
+            </div>
+            <div class="time-section">
+              <h4>Seconds</h4>
+              <input class="seconds-input" type="text" name="" value="">
+            </div>
+          </article>
+          <div class="start-activity">
+            <button class="start-activity-button" type="button" name="start-activity">START ACTIVITY</button>
+          </div>
+        </div>
+      </section>
+      <section class="past-activities">
+        <h3>Past Activities</h3>
+        <p class="hidden">You haven't logged any activites yet.<br>Complete the form to the left to get started! </p>
+
+      </section>
+    </main>
+
+  </body>
+  <script type="text/javascript" src="main.js"></script>
+</html>

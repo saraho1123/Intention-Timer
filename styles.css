@@ -1,0 +1,118 @@
+/*
+Main background: #2B2733
+Text on main background: #CBC9CF
+Header, cards: #46424D
+Card shadow: #26222D
+Text on header and cards: #FFF
+Study: #B3FD78
+Meditate: #C278FD
+Exercise: #FD8078
+Error: #EFB7EC
+*/
+
+body {
+ font-family: 'Montserrat';
+ /* font-weight: 400; */
+ /* font-size: 20px; */
+ background: #2B2733;
+ color: #CBC9CF;
+ margin: 0;
+}
+
+header {
+  text-align: center;
+  background:  #46424D;
+  padding: 2px;
+  font-size: 15;
+}
+
+main {
+  display: flex;
+
+}
+
+article {
+  margin-top: 3em;
+}
+
+.new-activity {
+  width: 60%;
+}
+
+.past-activities {
+  border-left: #46424D 3px solid;
+  height: 600px;
+  width: 40%;
+}
+
+.cat-button {
+  width: 11em;
+  height: 5em;
+  background: transparent;
+  color: #CBC9CF;
+  border: #CBC9CF 2px solid;
+  border-radius: 7px;
+}
+
+.cat-img {
+  height: 2.6em;
+  padding-top: 5px;
+}
+
+.selection-box {
+  background: #46424D;
+  margin: 1em;
+  margin-top: 0;
+  padding: 2em 4.2em;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cat-titles {
+  margin: 3px;
+}
+
+input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px #CBC9CF solid;
+  width: 100%;
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time-section {
+  width: 15em;
+}
+
+.start-activity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.start-activity-button {
+  padding: .5em 1.5em;
+  border-radius: 6px;
+  margin-top: 3em;
+}
+
+h3 {
+  padding: 1em 1em .5em 1em;
+  margin-bottom: 0;
+}
+
+p {
+  text-align: center;
+  font-size: small;
+}
+
+.hidden {
+  display: none;
+}
