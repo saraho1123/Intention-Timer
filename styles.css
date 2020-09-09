@@ -65,11 +65,26 @@ article {
   outline:none;
   background: url(assets/study-active.svg) 4.35em 0.5em/2em no-repeat;
 }
+.meditate {
+  background: url(assets/meditate.svg) 4.35em 0.5em/2em no-repeat;
+}
 
 .meditate-active {
   color:#C278FD;
   border:#C278FD 2px solid;
   outline:none;
+  background: url(assets/meditate-active.svg) 4.35em 0.5em/2em no-repeat;
+}
+
+.exercise {
+  background: url(assets/exercise.svg) 4.35em 0.5em/2em no-repeat;
+}
+
+.exercise-active {
+  color:#C278FD;
+  border:#C278FD 2px solid;
+  outline:none;
+  background: url(assets/exercise-active.svg) 4.35em 0.5em/2em no-repeat;
 }
 
 .cat-img {
@@ -99,6 +114,7 @@ input {
   border: 0;
   border-bottom: 1px #CBC9CF solid;
   width: 100%;
+  outline: none;
 }
 
 .time {
