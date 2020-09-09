@@ -52,11 +52,39 @@ article {
   color: #CBC9CF;
   border: #CBC9CF 2px solid;
   border-radius: 7px;
+  outline:none;
 }
 
-.cat-img {
-  height: 2.6em;
-  padding-top: 5px;
+.study {
+  background: url(assets/study.svg) 4.35em 0.5em/2em no-repeat;
+}
+
+.study-active {
+  color:#B3FD78;
+  border:#B3FD78 2px solid;
+  outline:none;
+  background: url(assets/study-active.svg) 4.35em 0.5em/2em no-repeat;
+}
+.meditate {
+  background: url(assets/meditate.svg) 4.35em 0.5em/2em no-repeat;
+}
+
+.meditate-active {
+  color:#C278FD;
+  border:#C278FD 2px solid;
+  outline:none;
+  background: url(assets/meditate-active.svg) 4.35em 0.5em/2em no-repeat;
+}
+
+.exercise {
+  background: url(assets/exercise.svg) 4.35em 0.5em/2em no-repeat;
+}
+
+.exercise-active {
+  color:#FD8078;
+  border:#FD8078 2px solid;
+  outline:none;
+  background: url(assets/exercise-active.svg) 4.35em 0.5em/2em no-repeat;
 }
 
 .selection-box {
@@ -73,7 +101,7 @@ article {
 }
 
 .cat-titles {
-  margin: 3px;
+  margin-top: 3em;
 }
 
 input {
@@ -81,6 +109,7 @@ input {
   border: 0;
   border-bottom: 1px #CBC9CF solid;
   width: 100%;
+  outline: none;
 }
 
 .time {
