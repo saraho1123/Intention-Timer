@@ -55,9 +55,20 @@ article {
   outline:none;
 }
 
+.study {
+  background: url(assets/study.svg) 4.35em 0.5em/2em no-repeat;
+}
+
 .study-active {
   color:#B3FD78;
   border:#B3FD78 2px solid;
+  outline:none;
+  background: url(assets/study-active.svg) 4.35em 0.5em/2em no-repeat;
+}
+
+.meditate-active {
+  color:#C278FD;
+  border:#C278FD 2px solid;
   outline:none;
 }
 
@@ -80,7 +91,7 @@ article {
 }
 
 .cat-titles {
-  margin: 3px;
+  margin-top: 3em;
 }
 
 input {
