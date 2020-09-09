@@ -81,15 +81,10 @@ article {
 }
 
 .exercise-active {
-  color:#C278FD;
-  border:#C278FD 2px solid;
+  color:#FD8078;
+  border:#FD8078 2px solid;
   outline:none;
   background: url(assets/exercise-active.svg) 4.35em 0.5em/2em no-repeat;
-}
-
-.cat-img {
-  height: 2.6em;
-  padding-top: 5px;
 }
 
 .selection-box {
