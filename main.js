@@ -10,8 +10,8 @@ studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
 exerciseButton.addEventListener('click', changeExerciseColor);
 
-minutesInput.addEventListener('keyup', limitChar)
-secondsInput.addEventListener('keyup', limitChar)
+minutesInput.addEventListener('keyup', limitMin)
+secondsInput.addEventListener('keyup', limitSec)
 
 function changeColor(button, category) {
     button.classList.add(category);
@@ -42,13 +42,28 @@ function changeExerciseColor() {
 // limit minutes to two digits and seconds to under 60
 // prevent "e" from use in time inputs
 
-function limitChar() {
+function limitMin() {
+    preventInvalids(event, minutesInput);
     var minutes = parseInt(minutesInput.value);
-    var seconds = parseInt(secondsInput.value);
     if (minutes > 90) {
-        minutesInput.value = '90';
+        minutesInput.value = 90;
     }
+}
+
+function limitSec() {
+    preventInvalids(event, secondsInput);
+    var seconds = parseInt(secondsInput.value);
     if (seconds > 60) {
-        secondsInput.value = '60';
+        secondsInput.value = 60;
+    }
+}
+
+function preventInvalids(event,inputField) {
+    var invalidChars = ['+', '-', 'e', 'E'];
+    for (var i = 0; i < invalidChars.length; i++) {
+        if (event.key === invalidChars[i]) {
+            event.preventDefault();
+            inputField.value = '';
+        }
     }
 }
