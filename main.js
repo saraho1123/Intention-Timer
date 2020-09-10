@@ -7,7 +7,8 @@ var exerciseButton = document.querySelector('.exercise');
 var accomplishInput = document.querySelector('.accomplish-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
-
+var newActivitySection = document.querySelector('.new');
+var currentActivitySection = document.querySelector('.current');
 
 var startActivityBtn = document.querySelector('.start-activity-button');
 
@@ -16,31 +17,24 @@ meditateButton.addEventListener('click', changeMeditateColor);
 exerciseButton.addEventListener('click', changeExerciseColor);
 minutesInput.addEventListener('keyup', limitMin);
 secondsInput.addEventListener('keyup', limitSec);
-
 startActivityBtn.addEventListener('click', createCurrentActivity);
 
-function changeColor(button, category) {
-    button.classList.add(category);
-}
-
-function returnDefaultColor(button1, category1, button2, category2) {
-    button1.classList.remove(category1);
+function changeColor(button1, category1, button2, category2, button3, category3) {
+    button1.classList.add(category1);
     button2.classList.remove(category2);
+    button3.classList.remove(category3);
 }
 
 function changeStudyColor() {
-    changeColor(studyButton, 'study-active');
-    returnDefaultColor(meditateButton, 'meditate-active', exerciseButton, 'exercise-active');
+    changeColor(studyButton, 'study-active', meditateButton, 'meditate-active', exerciseButton, 'exercise-active');
 }
 
 function changeMeditateColor() {
-    changeColor(meditateButton, 'meditate-active');
-    returnDefaultColor(studyButton, 'study-active', exerciseButton, 'exercise-active');
+    changeColor(meditateButton, 'meditate-active', studyButton, 'study-active', exerciseButton, 'exercise-active');
 }
 
 function changeExerciseColor() {
-    changeColor(exerciseButton, 'exercise-active');
-    returnDefaultColor(studyButton, 'study-active', meditateButton, 'meditate-active');
+    changeColor(exerciseButton, 'exercise-active', studyButton, 'study-active', meditateButton, 'meditate-active');
 }
 
 function limitMin() {
@@ -70,6 +64,7 @@ function preventInvalids(event, inputField) {
 }
 
 function createCurrentActivity() {
+    changeColor(newActivitySection, 'hidden', currentActivitySection, 'hidden');
     if (studyButton.classList.contains('study-active')) {
         createInstance('study-active');
     } else if (meditateButton.classList.contains('meditate-active')) {
