@@ -1,10 +1,15 @@
 var studyButton = document.querySelector('.study');
 var meditateButton = document.querySelector('.meditate');
 var exerciseButton = document.querySelector('.exercise');
+var accomplishInput = document.querySelector('.accomplish-input');
+var minutesInput = document.querySelector('.minutes-input');
+var secondsInput = document.querySelector('.seconds-input');
 
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
 exerciseButton.addEventListener('click', changeExerciseColor);
+minutesInput.addEventListener('keyup', limitMin)
+secondsInput.addEventListener('keyup', limitSec)
 
 function changeColor(button, category) {
     button.classList.add(category);
@@ -28,4 +33,30 @@ function changeMeditateColor() {
 function changeExerciseColor() {
     changeColor(exerciseButton, 'exercise-active');
     returnDefaultColor(studyButton, 'study-active', meditateButton, 'meditate-active');
+}
+
+function limitMin() {
+    preventInvalids(event, minutesInput);
+    minutesInput.value = parseInt(minutesInput.value);
+    if (minutesInput.value > 90) {
+        minutesInput.value = 90;
+    }
+}
+
+function limitSec() {
+    preventInvalids(event, secondsInput);
+    secondsInput.value = parseInt(secondsInput.value);
+    if (secondsInput.value > 60) {
+        secondsInput.value = 60;
+    }
+}
+
+function preventInvalids(event, inputField) {
+    var invalidChars = ['+', '-', 'e', 'E'];
+    for (var i = 0; i < invalidChars.length; i++) {
+        if (event.key === invalidChars[i]) {
+            event.preventDefault();
+            inputField.value = '';
+        }
+    }
 }
