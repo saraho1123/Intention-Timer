@@ -1,7 +1,6 @@
 var studyButton = document.querySelector('.study');
 var meditateButton = document.querySelector('.meditate');
 var exerciseButton = document.querySelector('.exercise');
-
 var accomplishInput = document.querySelector('.accomplish-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
@@ -9,7 +8,6 @@ var secondsInput = document.querySelector('.seconds-input');
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
 exerciseButton.addEventListener('click', changeExerciseColor);
-
 minutesInput.addEventListener('keyup', limitMin)
 secondsInput.addEventListener('keyup', limitSec)
 
@@ -37,28 +35,23 @@ function changeExerciseColor() {
     returnDefaultColor(studyButton, 'study-active', meditateButton, 'meditate-active');
 }
 
-// accessing accomplish, minutes, and seconds inputs
-// limiting the inputs of minutes and seconds to integers
-// limit minutes to two digits and seconds to under 60
-// prevent "e" from use in time inputs
-
 function limitMin() {
     preventInvalids(event, minutesInput);
-    var minutes = parseInt(minutesInput.value);
-    if (minutes > 90) {
+    minutesInput.value = parseInt(minutesInput.value);
+    if (minutesInput.value > 90) {
         minutesInput.value = 90;
     }
 }
 
 function limitSec() {
     preventInvalids(event, secondsInput);
-    var seconds = parseInt(secondsInput.value);
-    if (seconds > 60) {
+    secondsInput.value = parseInt(secondsInput.value);
+    if (secondsInput.value > 60) {
         secondsInput.value = 60;
     }
 }
 
-function preventInvalids(event,inputField) {
+function preventInvalids(event, inputField) {
     var invalidChars = ['+', '-', 'e', 'E'];
     for (var i = 0; i < invalidChars.length; i++) {
         if (event.key === invalidChars[i]) {
