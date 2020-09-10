@@ -1,3 +1,6 @@
+var currentActivity;
+var pastActivities = [];
+
 var studyButton = document.querySelector('.study');
 var meditateButton = document.querySelector('.meditate');
 var exerciseButton = document.querySelector('.exercise');
@@ -60,3 +63,7 @@ function preventInvalids(event, inputField) {
         }
     }
 }
+
+// A Start Activity button is provided to submit the data entered into the form. When the button is clicked, update your data model with an instance of the Activity class.
+// access start activity button and add event listener to it
+// function that instantiates a new Activity object 
