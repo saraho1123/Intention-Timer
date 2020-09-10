@@ -8,6 +8,7 @@ var accomplishInput = document.querySelector('.accomplish-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 
+
 var startActivityBtn = document.querySelector('.start-activity-button');
 
 studyButton.addEventListener('click', changeStudyColor);
@@ -76,6 +77,7 @@ function createCurrentActivity() {
     } else if (exerciseButton.classList.contains('exercise-active')) {
         createInstance('exercise-active');
     }
+
 }
 
 function createInstance(activeClass) {

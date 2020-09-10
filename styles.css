@@ -28,14 +28,13 @@ header {
 
 main {
   display: flex;
-
 }
 
 article {
   margin-top: 3em;
 }
 
-.new-activity {
+.activity {
   width: 60%;
 }
 
@@ -87,7 +86,7 @@ article {
   background: url(assets/exercise-active.svg) 4.35em 0.5em/2em no-repeat;
 }
 
-.selection-box {
+.box {
   background: #46424D;
   margin: 1em;
   margin-top: 0;
@@ -141,6 +140,30 @@ h3 {
 p {
   text-align: center;
   font-size: small;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.count-down {
+  font: 6em bold;
+  font-family: 'Montserrat';
+  color:white;
+  font-weight: bold;
+}
+
+.start-button {
+  color: #CBC9CF;
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+  background: transparent;
+  border: lightblue 0.1em solid;
+  font-size: 2em;
+  margin: 2em;
 }
 
 .hidden {
