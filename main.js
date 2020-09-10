@@ -73,10 +73,17 @@ function preventInvalids(event, inputField) {
 // function that instantiates a new Activity object 
 
 function createCurrentActivity() {
+        if (studyButton.classList.contains('study-active')) {
+            createInstance('study-active');
+        } else if (meditateButton.classList.contains('meditate-active')) {
+            createInstance('meditate-active');
+        } else if (exerciseButton.classList.contains('exercise-active')) {
+            createInstance('exercise-active');
+        }
+    }
 //   createInstance('study-active');
 //     createInstance('meditate-active');
 //     createInstance('exercise-active');
-}
 
 function createInstance(activeClass) {
   //  debugger
