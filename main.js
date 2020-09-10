@@ -1,3 +1,6 @@
+var currentActivity;
+var pastActivities = [];
+
 var studyButton = document.querySelector('.study');
 var meditateButton = document.querySelector('.meditate');
 var exerciseButton = document.querySelector('.exercise');
@@ -5,11 +8,15 @@ var accomplishInput = document.querySelector('.accomplish-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
 
+var startActivityBtn = document.querySelector('.start-activity-button');
+
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
 exerciseButton.addEventListener('click', changeExerciseColor);
-minutesInput.addEventListener('keyup', limitMin)
-secondsInput.addEventListener('keyup', limitSec)
+minutesInput.addEventListener('keyup', limitMin);
+secondsInput.addEventListener('keyup', limitSec);
+
+startActivityBtn.addEventListener('click', createCurrentActivity);
 
 function changeColor(button, category) {
     button.classList.add(category);
@@ -59,4 +66,28 @@ function preventInvalids(event, inputField) {
             inputField.value = '';
         }
     }
+}
+
+function createCurrentActivity() {
+    if (studyButton.classList.contains('study-active')) {
+        createInstance('study-active');
+    } else if (meditateButton.classList.contains('meditate-active')) {
+        createInstance('meditate-active');
+    } else if (exerciseButton.classList.contains('exercise-active')) {
+        createInstance('exercise-active');
+    }
+}
+
+function createInstance(activeClass) {
+    var categories = [studyButton, meditateButton, exerciseButton]
+    for (var i = 0; i < categories.length; i++) {
+        if (categories[i].classList.contains(activeClass)) {
+            currentActivity = new Activity (        
+                categories[i].innerText,
+                accomplishInput.value,
+                minutesInput.value,
+                secondsInput.value
+                );
+        } 
+    } 
 }
