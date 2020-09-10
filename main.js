@@ -68,25 +68,17 @@ function preventInvalids(event, inputField) {
     }
 }
 
-// A Start Activity button is provided to submit the data entered into the form. When the button is clicked, update your data model with an instance of the Activity class.
-// access start activity button and add event listener to it
-// function that instantiates a new Activity object 
-
 function createCurrentActivity() {
-        if (studyButton.classList.contains('study-active')) {
-            createInstance('study-active');
-        } else if (meditateButton.classList.contains('meditate-active')) {
-            createInstance('meditate-active');
-        } else if (exerciseButton.classList.contains('exercise-active')) {
-            createInstance('exercise-active');
-        }
+    if (studyButton.classList.contains('study-active')) {
+        createInstance('study-active');
+    } else if (meditateButton.classList.contains('meditate-active')) {
+        createInstance('meditate-active');
+    } else if (exerciseButton.classList.contains('exercise-active')) {
+        createInstance('exercise-active');
     }
-//   createInstance('study-active');
-//     createInstance('meditate-active');
-//     createInstance('exercise-active');
+}
 
 function createInstance(activeClass) {
-  //  debugger
     var categories = [studyButton, meditateButton, exerciseButton]
     for (var i = 0; i < categories.length; i++) {
         if (categories[i].classList.contains(activeClass)) {
@@ -98,10 +90,4 @@ function createInstance(activeClass) {
                 );
         } 
     } 
-    console.log(currentActivity)
 }
-
-// pass three parameters into helper function, inside helper function, any of the elements contain any of parameters, create new instance
-
-//inside createCurrentActivity assign variable to array of three active cats
-//for loop for array, iterate through, if statement inside the loop, if(event.target.classList.contains(array[i])) { createInstance(array[i])}
