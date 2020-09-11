@@ -7,10 +7,10 @@ var exerciseButton = document.querySelector('.exercise');
 var accomplishInput = document.querySelector('.accomplish-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
+var buttonText = document.querySelectorAll('.cat-titles')
 var newActivitySection = document.querySelector('.new');
 var currentActivitySection = document.querySelector('.current');
 var startButton = document.querySelector('.start-button');
-
 var startActivityBtn = document.querySelector('.start-activity-button');
 
 studyButton.addEventListener('click', changeStudyColor);
@@ -20,28 +20,29 @@ minutesInput.addEventListener('keyup', limitMin);
 secondsInput.addEventListener('keyup', limitSec);
 startActivityBtn.addEventListener('click', createCurrentActivity);
 
-function changeColor(button, category) {
-    button.classList.add(category);
-}
-
-function returnDefaultColor(button1, category1, button2, category2) {
-    button1.classList.remove(category1);
-    button2.classList.remove(category2);
+function changeColor(button1, category1, button2, category2, button3, category3) {
+    if (button2 == undefined) {
+        button1.classList.add(category1);
+    } else if (button3 == undefined) {
+        button1.classList.add(category1);
+        button2.classList.remove(category2);
+    } else {
+        button1.classList.add(category1);
+        button2.classList.remove(category2);
+        button3.classList.remove(category3);
+    }
 }
 
 function changeStudyColor() {
-    changeColor(studyButton, 'study-active');
-    returnDefaultColor(meditateButton, 'meditate-active', exerciseButton, 'exercise-active');
+    changeColor(studyButton, 'study-active', meditateButton, 'meditate-active', exerciseButton, 'exercise-active');
 }
 
 function changeMeditateColor() {
-    changeColor(meditateButton, 'meditate-active');
-    returnDefaultColor(studyButton, 'study-active', exerciseButton, 'exercise-active');
+    changeColor(meditateButton, 'meditate-active', studyButton, 'study-active', exerciseButton, 'exercise-active');
 }
 
 function changeExerciseColor() {
-    changeColor(exerciseButton, 'exercise-active');
-    returnDefaultColor(studyButton, 'study-active', meditateButton, 'meditate-active');
+    changeColor(exerciseButton, 'exercise-active', studyButton, 'study-active', meditateButton, 'meditate-active');
 }
 
 function limitMin() {
@@ -71,25 +72,24 @@ function preventInvalids(event, inputField) {
 }
 
 function createCurrentActivity() {
-    changeColor(newActivitySection,'hidden');
-    currentActivitySection.classList.remove('hidden');
+    changeColor(newActivitySection,'hidden', currentActivitySection, 'hidden');
     if (studyButton.classList.contains('study-active')) {
         createInstance('study-active');
         changeColor(startButton,'study-circle');
     } else if (meditateButton.classList.contains('meditate-active')) {
         createInstance('meditate-active');
+        changeColor(startButton,'meditate-circle');
     } else if (exerciseButton.classList.contains('exercise-active')) {
         createInstance('exercise-active');
+        changeColor(startButton,'exercise-circle');
     }
-
 }
 
 function createInstance(activeClass) {
-    var categories = [studyButton, meditateButton, exerciseButton]
-    for (var i = 0; i < categories.length; i++) {
-        if (categories[i].classList.contains(activeClass)) {
+    for (var i = 0; i < buttonText.length; i++) {
+        if (buttonText[i].parentNode.classList.contains(activeClass)) {
             currentActivity = new Activity (        
-                categories[i].innerText,
+                buttonText[i].innerText,
                 accomplishInput.value,
                 minutesInput.value,
                 secondsInput.value
