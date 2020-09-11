@@ -165,6 +165,17 @@ p {
   font-size: 2em;
   margin: 2em;
 }
+.study-circle {
+  border:#B3FD78 0.1em solid;
+} 
+
+.meditate-circle {
+  border: #C278FD 0.1em solid;
+}
+
+.exercise-circle {
+  border: #FD8078 0.1em solid;
+} 
 
 .hidden {
   display: none;
