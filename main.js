@@ -100,8 +100,10 @@ function createInstance(activeClass) {
     }
 }
 
-function isCatChosen() {
-  if (!studyButton.classList.contains('study-active') && !meditateButton.classList.contains('meditate-active') && !exerciseButton.classList.contains('exercise-active')) {
+function isCatChosen(btn1, btn2, btn3) {
+  if (!btn1.classList.contains('study-active') &&
+  !btn2.classList.contains('meditate-active') &&
+  !btn3.classList.contains('exercise-active')) {
     errorMsg[0].classList.remove('hidden');
   } else {
     errorMsg[0].classList.add('hidden');
@@ -120,9 +122,12 @@ function areInputsDefined(userInputs) {
 
 function startActivity() {
   var inputs = [accomplishInput, minutesInput, secondsInput];
-  isCatChosen();
+  isCatChosen(studyButton, meditateButton, exerciseButton);
   areInputsDefined(inputs);
-  if (errorMsg[0].classList.contains('hidden') && errorMsg[1].classList.contains('hidden') && errorMsg[2].classList.contains('hidden') && errorMsg[3].classList.contains('hidden')) {
+  if (errorMsg[0].classList.contains('hidden') &&
+  errorMsg[1].classList.contains('hidden') &&
+  errorMsg[2].classList.contains('hidden') &&
+  errorMsg[3].classList.contains('hidden')) {
     createCurrentActivity();
     document.getElementById('user-accomplish').innerText = currentActivity.description;
     document.getElementById('user-minutes').innerText = currentActivity.minutes;
