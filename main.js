@@ -137,21 +137,22 @@ function startActivity() {
 }
 
 function startCountDown() {
-  var userMinutes = 0; // this will be a user input
-  var time = userMinutes * 60;
-  var totalSeconds = time + 3; // this will be a user input
-  var minDisplay = document.getElementById('user-minutes');
-  var secDisplay = document.getElementById('user-seconds');
-  var interval = setInterval(updateCountDown, 1000);
-  function updateCountDown() {
-    totalSeconds--
-    var minutes = Math.floor(totalSeconds / 60);
-    var seconds = Math.floor(totalSeconds % 60);
-    minDisplay.innerText = minutes;
-    secDisplay.innerText = seconds;
-    if (totalSeconds === 0) {
-      clearInterval(interval);
-    }
-  }
-  // we need to add zeros to the front of single digit minutes and seconds.
+    console.log(currentActivity.startTimer())
+//   var userMinutes = +currentActivity.minutes;
+//   var time = userMinutes * 60;
+//   var totalSeconds = time + +currentActivity.seconds;
+//   var minDisplay = document.getElementById('user-minutes');
+//   var secDisplay = document.getElementById('user-seconds');
+//   var interval = setInterval(updateCountDown, 1000);
+//   function updateCountDown() {
+//     totalSeconds--
+//     var minutes = Math.floor(totalSeconds / 60);
+//     var seconds = Math.floor(totalSeconds % 60);
+//     minDisplay.innerText = minutes;
+//     secDisplay.innerText = seconds;
+//     if (totalSeconds === 0) {
+//       clearInterval(interval);
+//     }
+//   }
+//   // we need to add zeros to the front of single digit minutes and seconds.
 }

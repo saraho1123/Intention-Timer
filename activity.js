@@ -9,7 +9,9 @@ class Activity {
     }
 
     startTimer() {
-
+        this.minutes = +this.minutes * 60;
+        debugger
+        return +this.minutes + +this.seconds;
     }
 
     markComplete() {
