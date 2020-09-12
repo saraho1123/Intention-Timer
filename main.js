@@ -154,7 +154,6 @@ function startCountDown() {
         seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
         if (totalSeconds <= 0) {
         clearInterval(interval);
-        alert(`Remove your hands from the keyboard and walk away (mic drop).`);
             }
         }
     }
