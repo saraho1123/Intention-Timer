@@ -20,6 +20,7 @@ exerciseButton.addEventListener('click', changeExerciseColor);
 minutesInput.addEventListener('keyup', limitMin);
 secondsInput.addEventListener('keyup', limitSec);
 startActivityBtn.addEventListener('click', startActivity);
+startButton.addEventListener('click', startCountDown);
 
 function changeColor(button1, category1, button2, category2, button3, category3) {
     if (button2 == undefined) {
@@ -131,6 +132,26 @@ function startActivity() {
     createCurrentActivity();
     document.getElementById('user-accomplish').innerText = currentActivity.description;
     document.getElementById('user-minutes').innerText = currentActivity.minutes;
-    document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
+    document.getElementById('user-seconds').innerText = currentActivity.seconds;
   }
+}
+
+function startCountDown() {
+  var userMinutes = 0; // this will be a user input
+  var time = userMinutes * 60;
+  var totalSeconds = time + 3; // this will be a user input
+  var minDisplay = document.getElementById('user-minutes');
+  var secDisplay = document.getElementById('user-seconds');
+  var interval = setInterval(updateCountDown, 1000);
+  function updateCountDown() {
+    totalSeconds--
+    var minutes = Math.floor(totalSeconds / 60);
+    var seconds = Math.floor(totalSeconds % 60);
+    minDisplay.innerText = minutes;
+    secDisplay.innerText = seconds;
+    if (totalSeconds === 0) {
+      clearInterval(interval);
+    }
+  }
+  // we need to add zeros to the front of single digit minutes and seconds.
 }
