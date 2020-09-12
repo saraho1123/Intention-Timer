@@ -102,27 +102,16 @@ function createInstance(activeClass) {
 }
 
 function startActivity() {
-  isCatChosen();
   var inputs = [accomplishInput, minutesInput, secondsInput];
+  isCatChosen();
   areInputsDefined(inputs);
-  // if no errormsg {}
-  // createCurrentActivity();
-
-  document.getElementById('user-accomplish').innerText = currentActivity.description;
-  document.getElementById('user-minutes').innerText = currentActivity.minutes;
-  document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
+  if (errorMsg[0].classList.contains('hidden') && errorMsg[1].classList.contains('hidden') && errorMsg[2].classList.contains('hidden') && errorMsg[3].classList.contains('hidden')) {
+    createCurrentActivity();
+    document.getElementById('user-accomplish').innerText = currentActivity.description;
+    document.getElementById('user-minutes').innerText = currentActivity.minutes;
+    document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
+  }
 }
-
-
-// If the Start Activity button is clicked before the user has entered information into all four inputs, the user will receive an error message, but will not lose any information that was provided.
-
-// function errorMesssage()
-// check if a button is chosen
-// check if all input fields are filled
-// if button no button is chosen, then call errorMessage.
-// if no button chosen,
-
-
 
 function isCatChosen() {
   if (!studyButton.classList.contains('study-active') && !meditateButton.classList.contains('meditate-active') && !exerciseButton.classList.contains('exercise-active')) {
@@ -133,7 +122,6 @@ function isCatChosen() {
 }
 
 function areInputsDefined(userInputs) {
-
   for (var i = 0; i < userInputs.length; i++) {
     if (userInputs[i].value === '') {
       errorMsg[i + 1].classList.remove('hidden');

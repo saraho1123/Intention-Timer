@@ -15,7 +15,7 @@ body {
  /* font-weight: 400; */
  /* font-size: 20px; */
  background: #2B2733;
- color: #CBC9CF;
+ color: #FFF;
  margin: 0;
 }
 
@@ -109,6 +109,7 @@ input {
   border-bottom: 1px #CBC9CF solid;
   width: 100%;
   outline: none;
+  color: #CBC9CF;
 }
 
 .time {
