@@ -13,6 +13,8 @@ var currentActivitySection = document.querySelector('.current');
 var startButton = document.querySelector('.start-button');
 var startActivityBtn = document.querySelector('.start-activity-button');
 var errorMsg = document.querySelectorAll('.error-message');
+var displayMin = document.getElementById('user-minutes');
+var displaySec = document.getElementById('user-seconds');
 
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
@@ -20,6 +22,7 @@ exerciseButton.addEventListener('click', changeExerciseColor);
 minutesInput.addEventListener('keyup', limitMin);
 secondsInput.addEventListener('keyup', limitSec);
 startActivityBtn.addEventListener('click', startActivity);
+startButton.addEventListener('click', startCountDown);
 
 function changeColor(button1, category1, button2, category2, button3, category3) {
     if (button2 == undefined) {
@@ -120,6 +123,12 @@ function areInputsDefined(userInputs) {
   }
 }
 
+function displayTimeSection() {
+    document.getElementById('user-accomplish').innerText = currentActivity.description;
+    currentActivity.minutes < 10 ? displayMin.innerText = `0${currentActivity.minutes}` : displayMin.innerText = currentActivity.minutes;
+    currentActivity.seconds < 10 ? displaySec.innerText = `0${currentActivity.seconds}` : displaySec.innerText = currentActivity.seconds;
+}
+
 function startActivity() {
   var inputs = [accomplishInput, minutesInput, secondsInput];
   isCatChosen(studyButton, meditateButton, exerciseButton);
@@ -129,8 +138,24 @@ function startActivity() {
   errorMsg[2].classList.contains('hidden') &&
   errorMsg[3].classList.contains('hidden')) {
     createCurrentActivity();
-    document.getElementById('user-accomplish').innerText = currentActivity.description;
-    document.getElementById('user-minutes').innerText = currentActivity.minutes;
-    document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
+    displayTimeSection();
   }
+}
+
+function startCountDown() {
+  var totalSeconds = currentActivity.startTimer();
+  if (totalSeconds > 0) {
+    var interval = setInterval(updateCountDown, 1000);
+    function updateCountDown() {
+        totalSeconds--
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = Math.floor(totalSeconds % 60);
+        minutes < 10 ?  displayMin.innerText = `0${minutes}` : displayMin.innerText = minutes;
+        seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
+        if (totalSeconds <= 0) {
+        clearInterval(interval);
+        alert(`Remove your hands from the keyboard and walk away (mic drop).`);
+            }
+        }
+    }
 }

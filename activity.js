@@ -9,11 +9,14 @@ class Activity {
     }
 
     startTimer() {
-
+        this.minutes = +this.minutes * 60;
+        return +this.minutes + +this.seconds;
     }
 
     markComplete() {
-
+        if (this.seconds < 0) {
+            this.completed = true
+        }
     }
 
     saveToStorage() {
