@@ -15,6 +15,9 @@ var startActivityBtn = document.querySelector('.start-activity-button');
 var errorMsg = document.querySelectorAll('.error-message');
 var displayMin = document.getElementById('user-minutes');
 var displaySec = document.getElementById('user-seconds');
+var countdownSection = document.querySelector('.count-down');
+var displayUserTimer = document.querySelector('.user-timer');
+
 
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
@@ -141,6 +144,11 @@ function startActivity() {
     displayTimeSection();
   }
 }
+function displayCongratMsg(msg) {
+  displayUserTimer.classList.add('hidden')
+  countdownSection.innerHTML = 
+  `<p class="msg"> ${msg} </p>`
+}
 
 function startCountDown() {
   var totalSeconds = currentActivity.startTimer();
@@ -154,7 +162,9 @@ function startCountDown() {
         seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
         if (totalSeconds <= 0) {
         clearInterval(interval);
-            }
+        displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
+        startButton.innerText = 'COMPLETE'
         }
+      }
     }
 }
