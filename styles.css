@@ -15,7 +15,7 @@ body {
  /* font-weight: 400; */
  /* font-size: 20px; */
  background: #2B2733;
- color: #CBC9CF;
+ color: #FFF;
  margin: 0;
 }
 
@@ -109,6 +109,7 @@ input {
   border-bottom: 1px #CBC9CF solid;
   width: 100%;
   outline: none;
+  color: #CBC9CF;
 }
 
 .time {
@@ -167,7 +168,7 @@ p {
 }
 .study-circle {
   border:#B3FD78 0.1em solid;
-} 
+}
 
 .meditate-circle {
   border: #C278FD 0.1em solid;
@@ -175,7 +176,16 @@ p {
 
 .exercise-circle {
   border: #FD8078 0.1em solid;
-} 
+}
+
+.error-message {
+  color: #EFB7EC;
+  text-align: left;
+}
+
+.error-img {
+  height: 1em;
+}
 
 .hidden {
   display: none;

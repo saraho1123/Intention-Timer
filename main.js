@@ -12,6 +12,7 @@ var newActivitySection = document.querySelector('.new');
 var currentActivitySection = document.querySelector('.current');
 var startButton = document.querySelector('.start-button');
 var startActivityBtn = document.querySelector('.start-activity-button');
+var errorMsg = document.querySelectorAll('.error-message');
 
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
@@ -101,9 +102,31 @@ function createInstance(activeClass) {
 }
 
 function startActivity() {
-  createCurrentActivity();
-  // document.getElementById('user-accomplish').innerText = currentActivity.description;
-  document.getElementById('user-accomplish').innerText = currentActivity.description;
-  document.getElementById('user-minutes').innerText = currentActivity.minutes;
-  document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
+  var inputs = [accomplishInput, minutesInput, secondsInput];
+  isCatChosen();
+  areInputsDefined(inputs);
+  if (errorMsg[0].classList.contains('hidden') && errorMsg[1].classList.contains('hidden') && errorMsg[2].classList.contains('hidden') && errorMsg[3].classList.contains('hidden')) {
+    createCurrentActivity();
+    document.getElementById('user-accomplish').innerText = currentActivity.description;
+    document.getElementById('user-minutes').innerText = currentActivity.minutes;
+    document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
+  }
+}
+
+function isCatChosen() {
+  if (!studyButton.classList.contains('study-active') && !meditateButton.classList.contains('meditate-active') && !exerciseButton.classList.contains('exercise-active')) {
+    errorMsg[0].classList.remove('hidden');
+  } else {
+    errorMsg[0].classList.add('hidden');
+  }
+}
+
+function areInputsDefined(userInputs) {
+  for (var i = 0; i < userInputs.length; i++) {
+    if (userInputs[i].value === '') {
+      errorMsg[i + 1].classList.remove('hidden');
+    } else {
+      errorMsg[i + 1].classList.add('hidden');
+    }
+  }
 }
