@@ -165,6 +165,7 @@ p {
   border: lightblue 0.1em solid;
   font-size: 2em;
   margin: 2em;
+  outline: none;
 }
 .study-circle {
   border:#B3FD78 0.1em solid;

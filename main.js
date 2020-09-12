@@ -144,15 +144,18 @@ function startActivity() {
 
 function startCountDown() {
   var totalSeconds = currentActivity.startTimer();
-  var interval = setInterval(updateCountDown, 1000);
-  function updateCountDown() {
-    totalSeconds--
-    var minutes = Math.floor(totalSeconds / 60);
-    var seconds = Math.floor(totalSeconds % 60);
-    minutes < 10 ?  displayMin.innerText = `0${minutes}` : displayMin.innerText = minutes;
-    seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
-    if (totalSeconds === 0) {
-      clearInterval(interval);
+  if (totalSeconds > 0) {
+    var interval = setInterval(updateCountDown, 1000);
+    function updateCountDown() {
+        totalSeconds--
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = Math.floor(totalSeconds % 60);
+        minutes < 10 ?  displayMin.innerText = `0${minutes}` : displayMin.innerText = minutes;
+        seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
+        if (totalSeconds <= 0) {
+        clearInterval(interval);
+        alert(`Remove your hands from the keyboard and walk away (mic drop).`);
+            }
+        }
     }
-  }
 }
