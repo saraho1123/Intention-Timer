@@ -167,7 +167,7 @@ p {
 }
 .study-circle {
   border:#B3FD78 0.1em solid;
-} 
+}
 
 .meditate-circle {
   border: #C278FD 0.1em solid;
@@ -175,7 +175,16 @@ p {
 
 .exercise-circle {
   border: #FD8078 0.1em solid;
-} 
+}
+
+.error-message {
+  color: #EFB7EC;
+  text-align: left;
+}
+
+.error-img {
+  height: 1em;
+}
 
 .hidden {
   display: none;

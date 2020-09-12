@@ -12,6 +12,7 @@ var newActivitySection = document.querySelector('.new');
 var currentActivitySection = document.querySelector('.current');
 var startButton = document.querySelector('.start-button');
 var startActivityBtn = document.querySelector('.start-activity-button');
+var errorMsg = document.querySelectorAll('.error-message');
 
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
@@ -101,9 +102,43 @@ function createInstance(activeClass) {
 }
 
 function startActivity() {
-  createCurrentActivity();
-  // document.getElementById('user-accomplish').innerText = currentActivity.description;
+  isCatChosen();
+  var inputs = [accomplishInput, minutesInput, secondsInput];
+  areInputsDefined(inputs);
+  // if no errormsg {}
+  // createCurrentActivity();
+
   document.getElementById('user-accomplish').innerText = currentActivity.description;
   document.getElementById('user-minutes').innerText = currentActivity.minutes;
   document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
+}
+
+
+// If the Start Activity button is clicked before the user has entered information into all four inputs, the user will receive an error message, but will not lose any information that was provided.
+
+// function errorMesssage()
+// check if a button is chosen
+// check if all input fields are filled
+// if button no button is chosen, then call errorMessage.
+// if no button chosen,
+
+
+
+function isCatChosen() {
+  if (!studyButton.classList.contains('study-active') && !meditateButton.classList.contains('meditate-active') && !exerciseButton.classList.contains('exercise-active')) {
+    errorMsg[0].classList.remove('hidden');
+  } else {
+    errorMsg[0].classList.add('hidden');
+  }
+}
+
+function areInputsDefined(userInputs) {
+
+  for (var i = 0; i < userInputs.length; i++) {
+    if (userInputs[i].value === '') {
+      errorMsg[i + 1].classList.remove('hidden');
+    } else {
+      errorMsg[i + 1].classList.add('hidden');
+    }
+  }
 }
