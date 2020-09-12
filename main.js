@@ -17,6 +17,8 @@ var displayMin = document.getElementById('user-minutes');
 var displaySec = document.getElementById('user-seconds');
 var countdownSection = document.querySelector('.count-down');
 var displayUserTimer = document.querySelector('.user-timer');
+var logButton = document.getElementById('log-button');
+var cardSection = document.querySelector('.card-section');
 
 
 studyButton.addEventListener('click', changeStudyColor);
@@ -26,6 +28,8 @@ minutesInput.addEventListener('keyup', limitMin);
 secondsInput.addEventListener('keyup', limitSec);
 startActivityBtn.addEventListener('click', startActivity);
 startButton.addEventListener('click', startCountDown);
+logButton.addEventListener('click', logActivity);
+
 
 function changeColor(button1, category1, button2, category2, button3, category3) {
     if (button2 == undefined) {
@@ -163,8 +167,20 @@ function startCountDown() {
         if (totalSeconds <= 0) {
         clearInterval(interval);
         displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
-        startButton.innerText = 'COMPLETE'
+        startButton.innerText = 'COMPLETE';
+        logButton.classList.remove('hidden');
         }
       }
     }
+}
+function logActivity() {
+  pastActivities.push(currentActivity);
+  var emptyLog = document.getElementById('empty-log');
+  changeColor(emptyLog, 'hidden', cardSection, 'hidden');
+  cardSection.innerHTML += 
+    `<h5 class="card card-cat">${currentActivity.category}</h5>
+    <h5 class="card card-time">${currentActivity.minutes} MIN ${currentActivity.seconds} SECONDS</h5>
+    <h5 class="card card-accomplish">${currentActivity.description}</h5>
+    <div class="card-color"><div class="card-border"></div></div>`
+  
 }
