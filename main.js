@@ -46,24 +46,15 @@ function changeExerciseColor() {
     changeColor(exerciseButton, 'exercise-active', studyButton, 'study-active', meditateButton, 'meditate-active');
 }
 
-function limitMin() {
-    preventInvalids(event, minutesInput);
-    minutesInput.value = parseInt(minutesInput.value);
-    if (minutesInput.value > 90) {
-        minutesInput.value = 90;
-    }
-}
-
-function limitSec() {
-    preventInvalids(event, secondsInput);
-    secondsInput.value = parseInt(secondsInput.value);
-    if (secondsInput.value > 59) {
-        secondsInput.value = 59;
-    }
+function limitTimeInput(timeInput, num) {
+  preventInvalids(event, timeInput);
+  timeInput.value = parseInt(timeInput.value);
+  if (timeInput.value > num) {
+      timeInput.value = num;
+  }
 }
 
 function preventInvalids(event, inputField) {
-  // debugger
     var invalidChars = ['+', '-', 'e', 'E'];
     for (var i = 0; i < invalidChars.length; i++) {
         if (event.key === invalidChars[i]) {
@@ -71,6 +62,14 @@ function preventInvalids(event, inputField) {
             inputField.value = '';
         }
     }
+}
+
+function limitMin() {
+  limitTimeInput(minutesInput, 90)
+}
+
+function limitSec() {
+  limitTimeInput(secondsInput, 59)
 }
 
 function createCurrentActivity() {
@@ -101,20 +100,10 @@ function createInstance(activeClass) {
     }
 }
 
-function startActivity() {
-  var inputs = [accomplishInput, minutesInput, secondsInput];
-  isCatChosen();
-  areInputsDefined(inputs);
-  if (errorMsg[0].classList.contains('hidden') && errorMsg[1].classList.contains('hidden') && errorMsg[2].classList.contains('hidden') && errorMsg[3].classList.contains('hidden')) {
-    createCurrentActivity();
-    document.getElementById('user-accomplish').innerText = currentActivity.description;
-    document.getElementById('user-minutes').innerText = currentActivity.minutes;
-    document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
-  }
-}
-
-function isCatChosen() {
-  if (!studyButton.classList.contains('study-active') && !meditateButton.classList.contains('meditate-active') && !exerciseButton.classList.contains('exercise-active')) {
+function isCatChosen(btn1, btn2, btn3) {
+  if (!btn1.classList.contains('study-active') &&
+  !btn2.classList.contains('meditate-active') &&
+  !btn3.classList.contains('exercise-active')) {
     errorMsg[0].classList.remove('hidden');
   } else {
     errorMsg[0].classList.add('hidden');
@@ -128,5 +117,20 @@ function areInputsDefined(userInputs) {
     } else {
       errorMsg[i + 1].classList.add('hidden');
     }
+  }
+}
+
+function startActivity() {
+  var inputs = [accomplishInput, minutesInput, secondsInput];
+  isCatChosen(studyButton, meditateButton, exerciseButton);
+  areInputsDefined(inputs);
+  if (errorMsg[0].classList.contains('hidden') &&
+  errorMsg[1].classList.contains('hidden') &&
+  errorMsg[2].classList.contains('hidden') &&
+  errorMsg[3].classList.contains('hidden')) {
+    createCurrentActivity();
+    document.getElementById('user-accomplish').innerText = currentActivity.description;
+    document.getElementById('user-minutes').innerText = currentActivity.minutes;
+    document.getElementById('user-seconds').innerText = `:${currentActivity.seconds}`;
   }
 }
