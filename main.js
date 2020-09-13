@@ -15,12 +15,13 @@ var startActivityBtn = document.querySelector('.start-activity-button');
 var errorMsg = document.querySelectorAll('.error-message');
 var displayMin = document.getElementById('user-minutes');
 var displaySec = document.getElementById('user-seconds');
-var countdownSection = document.querySelector('.count-down');
+var congratMsg = document.querySelector('.message');
 var displayUserTimer = document.querySelector('.user-timer');
 var logButton = document.getElementById('log-button');
 var cardSection = document.querySelector('.card-section');
 var completedActivitySection = document.querySelector('.completed');
 var createNewActivityBtn = document.querySelector('.new-activity-button');
+var cardBorder = document.querySelector('.card-border');
 
 
 studyButton.addEventListener('click', changeStudyColor);
@@ -151,9 +152,8 @@ function startActivity() {
   }
 }
 function displayCongratMsg(msg) {
-  displayUserTimer.classList.add('hidden')
-  countdownSection.innerHTML =
-  `<p class="message"> ${msg} </p>`
+  changeColor(displayUserTimer, 'hidden', congratMsg, 'hidden');
+  congratMsg.innerText = msg;
 }
 
 function startCountDown() {
@@ -167,10 +167,11 @@ function startCountDown() {
         minutes < 10 ?  displayMin.innerText = `0${minutes}` : displayMin.innerText = minutes;
         seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
         if (totalSeconds <= 0) {
-        clearInterval(interval);
-        displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
-        startButton.innerText = 'COMPLETE';
-        logButton.classList.remove('hidden');
+          clearInterval(interval);
+          displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
+          startButton.innerText = 'COMPLETE';
+          startButton.disabled = true;
+          logButton.classList.remove('hidden');
         }
       }
     }
@@ -187,28 +188,29 @@ function logActivity() {
     <div class="card-color"><div class="card-border"></div></div>`
 }
 
-function clearTimer() {
+function clearTimerSection() {
   startButton.innerText = 'START';
-  debugger
-  changeColor(document.querySelector('.message'), 'hidden', displayUserTimer, 'hidden');
+  startButton.disabled = false;
+  changeColor(congratMsg, 'hidden', displayUserTimer, 'hidden');
 }
 
-function clearCatButtonChoice() {
+function clearCatButtonSection() {
     buttonText[0].parentNode.classList.remove('study-active');
     buttonText[1].parentNode.classList.remove('meditate-active');
     buttonText[2].parentNode.classList.remove('exercise-active');
 }
 
-function clearUserInputs() {
+function clearUserInputsSection() {
   accomplishInput.value = '';
   minutesInput.value = '';
   secondsInput.value = '';
 }
 
 function createNewActivity() {
-  clearCatButtonChoice();
-  clearUserInputs();
-  clearTimer();
+  clearCatButtonSection();
+  clearUserInputsSection();
+  clearTimerSection();
+  changeColor(logButton, 'hidden')
   changeColor(completedActivitySection, 'hidden', newActivitySection, 'hidden');
 
 

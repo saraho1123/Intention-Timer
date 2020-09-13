@@ -161,6 +161,11 @@ p {
   font-weight: bold;
 }
 
+.user-timer {
+  font-size: 0.5em;
+  margin: 0;
+}
+
 .start-button {
   color: #CBC9CF;
   border-radius: 50%;
