@@ -92,6 +92,7 @@ article {
   margin-top: 0;
   padding: 2em 4.2em;
   box-shadow: 6px 6px #26222D;
+  height: 800px;
 }
 
 .categories {
@@ -230,6 +231,17 @@ p {
   background:red;
   height: 10px;
   width: 20px;
+}
+
+.create {
+  display: flex;
+  justify-content: center;
+}
+
+.new-activity-button {
+  height: fit-content;
+  padding: .2em 2em;
+  margin-top: 4.5em;;
 }
 
 .hidden {
