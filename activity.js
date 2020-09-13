@@ -15,7 +15,7 @@ class Activity {
 
     markComplete() {
         if (this.seconds < 0) {
-            this.completed = true
+            this.completed = true;
         }
     }
 

@@ -19,6 +19,8 @@ var countdownSection = document.querySelector('.count-down');
 var displayUserTimer = document.querySelector('.user-timer');
 var logButton = document.getElementById('log-button');
 var cardSection = document.querySelector('.card-section');
+var completedActivitySection = document.querySelector('.completed');
+var createNewActivityBtn = document.querySelector('.new-activity-button');
 
 
 studyButton.addEventListener('click', changeStudyColor);
@@ -29,7 +31,7 @@ secondsInput.addEventListener('keyup', limitSec);
 startActivityBtn.addEventListener('click', startActivity);
 startButton.addEventListener('click', startCountDown);
 logButton.addEventListener('click', logActivity);
-
+createNewActivityBtn.addEventListener('click', createNewActivity);
 
 function changeColor(button1, category1, button2, category2, button3, category3) {
     if (button2 == undefined) {
@@ -136,6 +138,8 @@ function displayTimeSection() {
     currentActivity.seconds < 10 ? displaySec.innerText = `0${currentActivity.seconds}` : displaySec.innerText = currentActivity.seconds;
 }
 
+
+
 function startActivity() {
   var inputs = [accomplishInput, minutesInput, secondsInput];
   isCatChosen(studyButton, meditateButton, exerciseButton);
@@ -150,7 +154,7 @@ function startActivity() {
 }
 function displayCongratMsg(msg) {
   displayUserTimer.classList.add('hidden')
-  countdownSection.innerHTML = 
+  countdownSection.innerHTML =
   `<p class="msg"> ${msg} </p>`
 }
 
@@ -177,10 +181,14 @@ function logActivity() {
   pastActivities.push(currentActivity);
   var emptyLog = document.getElementById('empty-log');
   changeColor(emptyLog, 'hidden', cardSection, 'hidden');
-  cardSection.innerHTML += 
+  changeColor(currentActivitySection, 'hidden', completedActivitySection, 'hidden');
+  cardSection.innerHTML +=
     `<h5 class="card card-cat">${currentActivity.category}</h5>
     <h5 class="card card-time">${currentActivity.minutes} MIN ${currentActivity.seconds} SECONDS</h5>
     <h5 class="card card-accomplish">${currentActivity.description}</h5>
     <div class="card-color"><div class="card-border"></div></div>`
-  
+}
+
+function createNewActivity() {
+  changeColor(completedActivitySection, 'hidden', newActivitySection, 'hidden');
 }
