@@ -138,8 +138,6 @@ function displayTimeSection() {
     currentActivity.seconds < 10 ? displaySec.innerText = `0${currentActivity.seconds}` : displaySec.innerText = currentActivity.seconds;
 }
 
-
-
 function startActivity() {
   var inputs = [accomplishInput, minutesInput, secondsInput];
   isCatChosen(studyButton, meditateButton, exerciseButton);
@@ -155,7 +153,7 @@ function startActivity() {
 function displayCongratMsg(msg) {
   displayUserTimer.classList.add('hidden')
   countdownSection.innerHTML =
-  `<p class="msg"> ${msg} </p>`
+  `<p class="message"> ${msg} </p>`
 }
 
 function startCountDown() {
@@ -189,6 +187,29 @@ function logActivity() {
     <div class="card-color"><div class="card-border"></div></div>`
 }
 
+function clearTimer() {
+  startButton.innerText = 'START';
+  debugger
+  changeColor(document.querySelector('.message'), 'hidden', displayUserTimer, 'hidden');
+}
+
+function clearCatButtonChoice() {
+    buttonText[0].parentNode.classList.remove('study-active');
+    buttonText[1].parentNode.classList.remove('meditate-active');
+    buttonText[2].parentNode.classList.remove('exercise-active');
+}
+
+function clearUserInputs() {
+  accomplishInput.value = '';
+  minutesInput.value = '';
+  secondsInput.value = '';
+}
+
 function createNewActivity() {
+  clearCatButtonChoice();
+  clearUserInputs();
+  clearTimer();
   changeColor(completedActivitySection, 'hidden', newActivitySection, 'hidden');
+
+
 }
