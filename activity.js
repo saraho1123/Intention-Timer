@@ -4,7 +4,7 @@ class Activity {
         this.description = accomplish;
         this.minutes = min;
         this.seconds = sec;
-        this.completed;
+        this.completed = false;
         this.id = Date.now();
     }
 

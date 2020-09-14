@@ -190,6 +190,7 @@ function startCountDown() {
         displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
         startButton.innerText = 'COMPLETE';
         logButton.classList.remove('hidden');
+        currentActivity.markComplete();
       }
     }
   }
