@@ -22,7 +22,6 @@ var cardSection = document.querySelector('.card-section');
 var viewCardSection = document.querySelector('.view-card')
 var completedActivitySection = document.querySelector('.completed');
 var createNewActivityBtn = document.querySelector('.new-activity-button');
-var cardBorder = document.querySelector('.card-border');
 
 
 studyButton.addEventListener('click', changeStudyColor);
@@ -169,35 +168,36 @@ function startActivity() {
     displayTimeSection();
   }
 }
+
 function displayCongratMsg(msg) {
   changeColor(displayUserTimer, 'hidden', congratMsg, 'hidden');
   congratMsg.innerText = msg;
 }
 
 function startCountDown() {
+  startButton.disabled = true;
   var totalSeconds = currentActivity.startTimer();
   if (totalSeconds > 0) {
     var interval = setInterval(updateCountDown, 1000);
     function updateCountDown() {
-        totalSeconds--
-        var minutes = Math.floor(totalSeconds / 60);
-        var seconds = Math.floor(totalSeconds % 60);
-        minutes < 10 ?  displayMin.innerText = `0${minutes}` : displayMin.innerText = minutes;
-        seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
-        if (totalSeconds <= 0) {
-          clearInterval(interval);
-          displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
-          startButton.innerText = 'COMPLETE';
-          startButton.disabled = true;
-          logButton.classList.remove('hidden');
-        }
+      totalSeconds--
+      var minutes = Math.floor(totalSeconds / 60);
+      var seconds = Math.floor(totalSeconds % 60);
+      minutes < 10 ?  displayMin.innerText = `0${minutes}` : displayMin.innerText = minutes;
+      seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
+      if (totalSeconds <= 0) {
+        clearInterval(interval);
+        displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
+        startButton.innerText = 'COMPLETE';
+        logButton.classList.remove('hidden');
       }
     }
+  }
 }
+
 function logActivity() {
   pastActivities.push(currentActivity);
   var emptyLog = document.getElementById('empty-log');
-  var cardBorder = document.querySelectorAll('.card-border');
   changeColor(emptyLog, 'hidden', cardSection, 'hidden');
   changeColor(currentActivitySection, 'hidden', completedActivitySection, 'hidden');
   cardSection.innerHTML +=
@@ -210,6 +210,7 @@ function logActivity() {
       <div class="card-border">
       </div>
     </section>`
+  var cardBorder = document.querySelectorAll('.card-border');
   if (currentActivity.category === 'Study') {
      cardBorder[cardBorder.length-1].style.backgroundColor = '#B3FD78';
   } else if (currentActivity.category === 'Meditate') {
