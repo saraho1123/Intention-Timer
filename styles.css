@@ -244,15 +244,6 @@ p {
   height: 3em;
   margin-top: 1em;
 }
-#study-card-border {
-  background: #B3FD78;
-}
-#meditate-card-border {
-  background: #C278FD;
-}
-#exercise-card-border {
-  background: #FD8078;
-}
 
 .create {
   display: flex;

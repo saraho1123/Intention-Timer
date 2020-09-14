@@ -30,6 +30,7 @@ meditateButton.addEventListener('click', changeMeditateColor);
 exerciseButton.addEventListener('click', changeExerciseColor);
 minutesInput.addEventListener('keyup', limitMin);
 secondsInput.addEventListener('keyup', limitSec);
+accomplishInput.addEventListener('keyup', limitAccomplish);
 startActivityBtn.addEventListener('click', startActivity);
 startButton.addEventListener('click', startCountDown);
 logButton.addEventListener('click', logActivity);
@@ -50,15 +51,18 @@ function changeColor(button1, category1, button2, category2, button3, category3)
 
 function changeStudyColor() {
     changeColor(studyButton, 'study-active', meditateButton, 'meditate-active', exerciseButton, 'exercise-active');
-}
+    isCatChosen(studyButton, meditateButton, exerciseButton);
+  }
 
 function changeMeditateColor() {
     changeColor(meditateButton, 'meditate-active', studyButton, 'study-active', exerciseButton, 'exercise-active');
-}
+    isCatChosen(studyButton, meditateButton, exerciseButton);
+  }
 
 function changeExerciseColor() {
     changeColor(exerciseButton, 'exercise-active', studyButton, 'study-active', meditateButton, 'meditate-active');
-}
+    isCatChosen(studyButton, meditateButton, exerciseButton);
+  }
 
 function limitTimeInput(timeInput, num) {
   preventInvalids(event, timeInput);
@@ -78,12 +82,18 @@ function preventInvalids(event, inputField) {
     }
 }
 
-function limitMin() {
-  limitTimeInput(minutesInput, 90)
+function limitAccomplish() {
+  areInputsDefined([accomplishInput], 1);
+}
+
+function limitMin() { 
+  limitTimeInput(minutesInput, 90);
+  areInputsDefined([minutesInput], 2);
 }
 
 function limitSec() {
-  limitTimeInput(secondsInput, 59)
+  limitTimeInput(secondsInput, 59);
+  areInputsDefined([secondsInput], 3);
 }
 
 function createCurrentActivity() {
@@ -117,14 +127,21 @@ function createInstance(activeClass) {
 function isCatChosen(btn1, btn2, btn3) {
   if (!btn1.classList.contains('study-active') &&
   !btn2.classList.contains('meditate-active') &&
-  !btn3.classList.contains('exercise-active')) {
+  !btn3.classList.contains('exercise-active')) {  
     errorMsg[0].classList.remove('hidden');
   } else {
     errorMsg[0].classList.add('hidden');
   }
 }
 
-function areInputsDefined(userInputs) {
+function areInputsDefined(userInputs,errorMsgIndex) {
+  if (errorMsgIndex && userInputs[0].value === '') {
+    errorMsg[errorMsgIndex].classList.remove('hidden');
+    return 
+  } else if (errorMsgIndex && userInputs[0].value !== '') {
+    errorMsg[errorMsgIndex].classList.add('hidden');
+    return
+  }
   for (var i = 0; i < userInputs.length; i++) {
     if (userInputs[i].value === '') {
       errorMsg[i + 1].classList.remove('hidden');
@@ -180,29 +197,28 @@ function startCountDown() {
 function logActivity() {
   pastActivities.push(currentActivity);
   var emptyLog = document.getElementById('empty-log');
+  var cardBorder = document.querySelectorAll('.card-border');
   changeColor(emptyLog, 'hidden', cardSection, 'hidden');
   changeColor(currentActivitySection, 'hidden', completedActivitySection, 'hidden');
-  cardSection.innerHTML = ''
-  for (var i=0; i<pastActivities.length; i++) {
-    cardSection.innerHTML +=
-      `<section class="new-card">
-        <div class="card">
-          <h5 class="card card-cat">${pastActivities[i].category}</h5>
-          <h5 class="card card-time">${pastActivities[i].minutes} MIN ${pastActivities[i].seconds} SECONDS</h5>
-          <h5 class="card card-accomplish">${pastActivities[i].description}</h5>
-        </div>
-        <div class="card-border">
-        </div>
-      </section>`
-    
-  if (pastActivities[i].category === 'Study') {
-     document.querySelector('.card-border').style.backgroundColor = '#B3FD78';
-  } else if (pastActivities[i].category === 'Meditate') {
-    document.querySelector('.card-border').style.backgroundColor = '#C278FD';
-  } else if (pastActivities[i].category === 'exercise') {
-    document.querySelector('.card-border').style.backgroundColor = '#FD8078';)
+  cardSection.innerHTML +=
+    `<section class="new-card">
+      <div class="card">
+        <h5 class="card card-cat">${currentActivity.category}</h5>
+        <h5 class="card card-time">${currentActivity.minutes} MIN ${currentActivity.seconds} SECONDS</h5>
+        <h5 class="card card-accomplish">${currentActivity.description}</h5>
+      </div>
+      <div class="card-border">
+      </div>
+    </section>`
+  if (currentActivity.category === 'Study') {
+     cardBorder[cardBorder.length-1].style.backgroundColor = '#B3FD78';
+  } else if (currentActivity.category === 'Meditate') {
+    cardBorder[cardBorder.length-1].style.backgroundColor = '#C278FD';
+  } else if (currentActivity.category === 'Exercise') {
+    cardBorder[cardBorder.length-1].style.backgroundColor = '#FD8078';
   }
 }
+
 
 function clearTimerSection() {
   startButton.innerText = 'START';
@@ -222,10 +238,18 @@ function clearUserInputsSection() {
   secondsInput.value = '';
 }
 
+function clearStartCircleColor() {
+  var circleColor= ['study-circle', 'meditate-circle', 'exercise-circle']
+    for (var i=0; i<circleColor.length; i++) {
+      startButton.classList.remove(circleColor[i])
+    }
+}
+
 function createNewActivity() {
   clearCatButtonSection();
   clearUserInputsSection();
   clearTimerSection();
+  clearStartCircleColor();
   changeColor(logButton, 'hidden')
   changeColor(completedActivitySection, 'hidden', newActivitySection, 'hidden');
 }
