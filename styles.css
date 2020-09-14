@@ -92,6 +92,7 @@ article {
   margin-top: 0;
   padding: 2em 4.2em;
   box-shadow: 6px 6px #26222D;
+  height: 800px;
 }
 
 .categories {
@@ -143,6 +144,10 @@ p {
   font-size: small;
 }
 
+.message {
+  font-size: 0.7em;
+}
+
 .timer {
   display: flex;
   flex-direction: column;
@@ -154,6 +159,11 @@ p {
   font-family: 'Montserrat';
   color:white;
   font-weight: bold;
+}
+
+.user-timer {
+  font-size: 0.5em;
+  margin: 0;
 }
 
 .start-button {
@@ -178,7 +188,11 @@ p {
 .exercise-circle {
   border: #FD8078 0.1em solid;
 }
-
+#log-button {
+  padding: 0.5em 3.5em;
+  font-size: 1.4em;
+  border-radius: 6px;
+}
 .error-message {
   color: #EFB7EC;
   text-align: left;
@@ -186,6 +200,60 @@ p {
 
 .error-img {
   height: 1em;
+}
+
+.card-section {
+  border-radius: 10px;
+  margin: 1em;
+  padding: 0.05em;
+}
+.new-card {
+  display: flex;
+  background: #46424D;
+  margin-bottom: 1em;
+  padding: 0.05em 0;
+}
+
+.card {
+  padding-left: 1em;
+  width: 90%;
+}
+
+.card-cat {
+  margin-bottom: 0;
+}
+
+.card-time {
+  margin: 0px;
+  color: #CBC9CF;
+}
+
+.card-accomplish {
+  margin-top: 10px;
+  font-size: small;
+  color: #CBC9CF;
+}
+.card-color {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-border {
+  background:blue;
+  width: 1%;
+  height: 2em;
+  margin-top: 1em;
+}
+
+.create {
+  display: flex;
+  justify-content: center;
+}
+
+.new-activity-button {
+  height: fit-content;
+  padding: .2em 2em;
+  margin-top: 4.5em;;
 }
 
 .hidden {

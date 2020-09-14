@@ -53,15 +53,24 @@
         <div class="timer box">
           <h2 id="user-accomplish">Accomplish input</h2>
           <div class="count-down">
-            <span id="user-minutes">05</span>:<span id="user-seconds">00</span>
+            <p class="user-timer"><span id="user-minutes">05</span>:<span id="user-seconds">00</span></p>
+            <p class="message hidden">msg</p>
           </div>
           <button class="start-button">START</button>
+          <button id="log-button" class="hidden">LOG ACTIVITY</button>
+        </div>
+      </section>
+      <section class="completed activity hidden">
+        <h3>Completed Activity</h3>
+        <div class="create box">
+          <button class="new-activity-button" type="button" name="create-activity">CREATE A NEW ACTIVITY</button>
         </div>
       </section>
       <section class="past-activities">
         <h3>Past Activities</h3>
-        <p class="hidden">You haven't logged any activites yet.<br>Complete the form to the left to get started! </p>
-
+        <p id="empty-log">You haven't logged any activites yet.<br>Complete the form to the left to get started! </p>
+        <div class="card-section hidden">
+        </div>
       </section>
     </main>
 
