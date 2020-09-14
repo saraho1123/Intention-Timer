@@ -14,12 +14,15 @@ class Activity {
     }
 
     markComplete() {
-        if (this.seconds < 0) {
-            this.completed = true;
-        }
+        this.completed = true;
+        //this.saveToStorage();
     }
 
     saveToStorage() {
-
+        //for (var i = 0; i < pastActivities.length; i++) {
+        var stringifyPastActivities = JSON.stringify(pastActivities[pastActivities.length-1]);
+        //}
+        localStorage.setItem('userActivities', stringifyPastActivities);
+        // JSON.parse(localStorage.getItem('userActivities'))
     }
 }
