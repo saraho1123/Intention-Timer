@@ -19,6 +19,7 @@ var congratMsg = document.querySelector('.message');
 var displayUserTimer = document.querySelector('.user-timer');
 var logButton = document.getElementById('log-button');
 var cardSection = document.querySelector('.card-section');
+var viewCardSection = document.querySelector('.view-card')
 var completedActivitySection = document.querySelector('.completed');
 var createNewActivityBtn = document.querySelector('.new-activity-button');
 var cardBorder = document.querySelector('.card-border');
@@ -181,11 +182,26 @@ function logActivity() {
   var emptyLog = document.getElementById('empty-log');
   changeColor(emptyLog, 'hidden', cardSection, 'hidden');
   changeColor(currentActivitySection, 'hidden', completedActivitySection, 'hidden');
-  cardSection.innerHTML +=
-    `<h5 class="card card-cat">${currentActivity.category}</h5>
-    <h5 class="card card-time">${currentActivity.minutes} MIN ${currentActivity.seconds} SECONDS</h5>
-    <h5 class="card card-accomplish">${currentActivity.description}</h5>
-    <div class="card-color"><div class="card-border"></div></div>`
+  cardSection.innerHTML = ''
+  for (var i=0; i<pastActivities.length; i++) {
+    cardSection.innerHTML +=
+      `<section class="new-card">
+        <div class="card">
+          <h5 class="card card-cat">${pastActivities[i].category}</h5>
+          <h5 class="card card-time">${pastActivities[i].minutes} MIN ${pastActivities[i].seconds} SECONDS</h5>
+          <h5 class="card card-accomplish">${pastActivities[i].description}</h5>
+        </div>
+        <div class="card-border">
+        </div>
+      </section>`
+    
+  if (pastActivities[i].category === 'Study') {
+     document.querySelector('.card-border').style.backgroundColor = '#B3FD78';
+  } else if (pastActivities[i].category === 'Meditate') {
+    document.querySelector('.card-border').style.backgroundColor = '#C278FD';
+  } else if (pastActivities[i].category === 'exercise') {
+    document.querySelector('.card-border').style.backgroundColor = '#FD8078';)
+  }
 }
 
 function clearTimerSection() {
@@ -212,6 +228,4 @@ function createNewActivity() {
   clearTimerSection();
   changeColor(logButton, 'hidden')
   changeColor(completedActivitySection, 'hidden', newActivitySection, 'hidden');
-
-
 }

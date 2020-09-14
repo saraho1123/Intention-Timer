@@ -205,12 +205,18 @@ p {
 .card-section {
   border-radius: 10px;
   margin: 1em;
-  background: #46424D;
   padding: 0.05em;
+}
+.new-card {
+  display: flex;
+  background: #46424D;
+  margin-bottom: 1em;
+  padding: 0.05em 0;
 }
 
 .card{
   padding-left: 1em;
+  width: 90%;
 }
 
 .card-cat {
@@ -233,9 +239,19 @@ p {
 }
 
 .card-border {
-  background:red;
-  height: 10px;
-  width: 20px;
+  background:blue;
+  width: 3%;
+  height: 3em;
+  margin-top: 1em;
+}
+#study-card-border {
+  background: #B3FD78;
+}
+#meditate-card-border {
+  background: #C278FD;
+}
+#exercise-card-border {
+  background: #FD8078;
 }
 
 .create {
