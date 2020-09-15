@@ -4,7 +4,7 @@ class Activity {
         this.description = accomplish;
         this.minutes = min;
         this.seconds = sec;
-        this.completed;
+        this.completed = false;
         this.id = Date.now();
     }
 
@@ -14,12 +14,13 @@ class Activity {
     }
 
     markComplete() {
-        if (this.seconds < 0) {
-            this.completed = true;
-        }
+        this.completed = true;
+        //this.saveToStorage();
     }
 
-    saveToStorage() {
-
+    saveToStorage(currentCard) {
+        pastActivities.push(currentCard);
+        var cards = JSON.stringify(pastActivities);
+        localStorage.setItem('userActivities', cards);
     }
 }

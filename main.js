@@ -22,7 +22,7 @@ var cardSection = document.querySelector('.card-section');
 var viewCardSection = document.querySelector('.view-card')
 var completedActivitySection = document.querySelector('.completed');
 var createNewActivityBtn = document.querySelector('.new-activity-button');
-
+var emptyLogSection = document.querySelector('#empty-log');
 
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
@@ -190,34 +190,42 @@ function startCountDown() {
         displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
         startButton.innerText = 'COMPLETE';
         logButton.classList.remove('hidden');
+        //currentActivity.markComplete();
       }
     }
   }
 }
 
-function logActivity() {
-  pastActivities.push(currentActivity);
-  var emptyLog = document.getElementById('empty-log');
-  changeColor(emptyLog, 'hidden', cardSection, 'hidden');
-  changeColor(currentActivitySection, 'hidden', completedActivitySection, 'hidden');
-  cardSection.innerHTML +=
-    `<section class="new-card">
-      <div class="card">
-        <h5 class="card card-cat">${currentActivity.category}</h5>
-        <h5 class="card card-time">${currentActivity.minutes} MIN ${currentActivity.seconds} SECONDS</h5>
-        <h5 class="card card-accomplish">${currentActivity.description}</h5>
-      </div>
-      <div class="card-border">
-      </div>
-    </section>`
-  var cardBorder = document.querySelectorAll('.card-border');
-  if (currentActivity.category === 'Study') {
-     cardBorder[cardBorder.length-1].style.backgroundColor = '#B3FD78';
-  } else if (currentActivity.category === 'Meditate') {
-    cardBorder[cardBorder.length-1].style.backgroundColor = '#C278FD';
-  } else if (currentActivity.category === 'Exercise') {
-    cardBorder[cardBorder.length-1].style.backgroundColor = '#FD8078';
+function returnFromLocalStorage() {
+  pastActivities = JSON.parse(localStorage.getItem('userActivities'))
+  cardSection.innerHTML = ""
+  for (var i = 0; i < pastActivities.length; i++) {
+    cardSection.innerHTML +=
+      `<section class="new-card">
+        <div class="card">
+          <h5 class="card card-cat">${pastActivities[i].category}</h5>
+          <h5 class="card card-time">${pastActivities[i].minutes} MIN ${pastActivities[i].seconds} SECONDS</h5>
+          <h5 class="card card-accomplish">${pastActivities[i].description}</h5>
+        </div>
+        <div class="card-border">
+        </div>
+      </section>`
+    var cardBorder = document.querySelectorAll('.card-border');
+    if (pastActivities[i].category === 'Study') {
+      cardBorder[cardBorder.length-1].style.backgroundColor = '#B3FD78';
+    } else if (pastActivities[i].category === 'Meditate') {
+      cardBorder[cardBorder.length-1].style.backgroundColor = '#C278FD';
+    } else if (pastActivities[i].category === 'Exercise') {
+      cardBorder[cardBorder.length-1].style.backgroundColor = '#FD8078';
+    }
   }
+}
+
+function logActivity() {
+  currentActivity.saveToStorage(currentActivity);
+  changeColor(emptyLogSection, 'hidden', cardSection, 'hidden');
+  changeColor(currentActivitySection, 'hidden', completedActivitySection, 'hidden');
+  returnFromLocalStorage();
 }
 
 
@@ -254,3 +262,12 @@ function createNewActivity() {
   changeColor(logButton, 'hidden')
   changeColor(completedActivitySection, 'hidden', newActivitySection, 'hidden');
 }
+
+function displayCardsOnLoad() {
+  if (localStorage.length > 0) {
+    changeColor(emptyLogSection, 'hidden', cardSection, 'hidden');
+    returnFromLocalStorage();
+  }
+}
+
+displayCardsOnLoad();
