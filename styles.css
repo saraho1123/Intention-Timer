@@ -40,7 +40,7 @@ article {
 
 .past-activities {
   border-left: #46424D 3px solid;
-  height: 600px;
+  height: 935px;
   width: 40%;
 }
 
@@ -89,7 +89,7 @@ article {
 .box {
   background: #46424D;
   margin: 1em;
-  margin-top: 0;
+  margin-top: 1em;
   padding: 2em 4.2em;
   box-shadow: 6px 6px #26222D;
   height: 800px;
@@ -145,7 +145,8 @@ p {
 }
 
 .message {
-  font-size: 0.7em;
+  font-size: 0.4em;
+  margin-top: 0;
 }
 
 .timer {
@@ -163,7 +164,7 @@ p {
 
 .user-timer {
   font-size: 0.5em;
-  margin: 0;
+  margin: 0 0 1em 0;
 }
 
 .start-button {
@@ -174,7 +175,7 @@ p {
   background: transparent;
   border: lightblue 0.1em solid;
   font-size: 2em;
-  margin: 2em;
+  margin: 0 2em 1em 2em;
   outline: none;
 }
 .study-circle {
@@ -212,6 +213,7 @@ p {
   background: #46424D;
   margin-bottom: 1em;
   padding: 0.05em 0;
+  box-shadow: 6px 6px #26222D;
 }
 
 .card {
