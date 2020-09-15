@@ -18,11 +18,9 @@ class Activity {
         //this.saveToStorage();
     }
 
-    saveToStorage() {
-        //for (var i = 0; i < pastActivities.length; i++) {
-        var stringifyPastActivities = JSON.stringify(pastActivities[pastActivities.length-1]);
-        //}
-        localStorage.setItem('userActivities', stringifyPastActivities);
-        // JSON.parse(localStorage.getItem('userActivities'))
+    saveToStorage(currentCard) {
+        pastActivities.push(currentCard);
+        var cards = JSON.stringify(pastActivities);
+        localStorage.setItem('userActivities', cards);
     }
 }
