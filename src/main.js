@@ -105,18 +105,20 @@ function limitSec() {
   areInputsDefined([secondsInput], 3);
 }
 
+function updateCircleColor(button, classProperty) { 
+  if (button.classList.contains(`${classProperty}-active`)) {
+    createInstance(`${classProperty}-active`);
+    addClassProperty(startButton, `${classProperty}-circle`);
+  }
+}
+
 function createCurrentActivity() {
-  addClassProperty(newActivitySection,'hidden')
-  removeClassProperty(currentActivitySection, 'hidden')
-  if (studyButton.classList.contains('study-active')) {
-    createInstance('study-active');
-    addClassProperty(startButton,'study-circle');
-  } else if (meditateButton.classList.contains('meditate-active')) {
-    createInstance('meditate-active');
-    addClassProperty(startButton,'meditate-circle');
-  } else if (exerciseButton.classList.contains('exercise-active')) {
-    createInstance('exercise-active');
-    addClassProperty(startButton,'exercise-circle');
+  addClassProperty(newActivitySection, 'hidden');
+  removeClassProperty(currentActivitySection, 'hidden');
+  var buttons = document.querySelectorAll('.cat-button')
+  var classList = ['study', 'meditate', 'exercise'];
+  for (var i = 0; i < buttons.length; i++) {
+    updateCircleColor(buttons[i], classList[i]);
   }
 }
 
