@@ -15,7 +15,6 @@ class Activity {
 
     markComplete() {
         this.completed = true;
-        //this.saveToStorage();
     }
 
     saveToStorage(currentCard) {
