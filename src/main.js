@@ -90,19 +90,22 @@ function preventInvalids(event, inputField) {
     }
   }
 }
-
+function updateErrorMsg(userInput, errorMsgIndex) {
+  userInput.value ? 
+  addClassProperty(errorMsg[errorMsgIndex], 'hidden') : removeClassProperty(errorMsg[errorMsgIndex], 'hidden');
+}
 function limitAccomplish() {
-  areInputsDefined([accomplishInput], 1);
+  updateErrorMsg(accomplishInput, 1);
 }
 
 function limitMin() {
   limitTimeInput(minutesInput, 90);
-  areInputsDefined([minutesInput], 2);
+  updateErrorMsg(minutesInput, 2);
 }
 
 function limitSec() {
   limitTimeInput(secondsInput, 59);
-  areInputsDefined([secondsInput], 3);
+  updateErrorMsg(secondsInput, 3);
 }
 
 function updateCircleColor(button, classProperty) { 
@@ -145,15 +148,7 @@ function isCatChosen(btn1, btn2, btn3) {
   }
 }
 
-// TODO: consider refactoring since it is long. Consider more about what it does first.
-function areInputsDefined(userInputs, errorMsgIndex) {
-  if (errorMsgIndex && userInputs[0].value === '') {
-    errorMsg[errorMsgIndex].classList.remove('hidden');
-    return
-  } else if (errorMsgIndex && userInputs[0].value !== '') {
-    errorMsg[errorMsgIndex].classList.add('hidden');
-    return
-  }
+function areInputsDefined(userInputs) {
   for (var i = 0; i < userInputs.length; i++) {
     if (userInputs[i].value === '') {
       errorMsg[i + 1].classList.remove('hidden');
