@@ -4,6 +4,7 @@ var pastActivities = [];
 var studyButton = document.querySelector('.study');
 var meditateButton = document.querySelector('.meditate');
 var exerciseButton = document.querySelector('.exercise');
+var catButtons = document.querySelectorAll('.cat-button')
 var startButton = document.querySelector('.start-button');
 var startActivityBtn = document.querySelector('.start-activity-button');
 var logButton = document.getElementById('log-button');
@@ -11,7 +12,7 @@ var createNewActivityBtn = document.querySelector('.new-activity-button');
 var accomplishInput = document.querySelector('.accomplish-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
-var buttonText = document.querySelectorAll('.cat-titles')
+//var buttonText = document.querySelectorAll('.cat-titles')
 var newActivitySection = document.querySelector('.new');
 var currentActivitySection = document.querySelector('.current');
 var cardSection = document.querySelector('.card-section');
@@ -33,9 +34,6 @@ startActivityBtn.addEventListener('click', startActivity);
 startButton.addEventListener('click', startCountDown);
 logButton.addEventListener('click', logActivity);
 createNewActivityBtn.addEventListener('click', createNewActivity);
-
-// TODO: consider breaking into 2 to reduce number of params?
-// NOTE: the button/category params alwasy come in a pair.
 
 function addClassProperty(button1, category1, button2, category2) {
   if (!button2) {
@@ -118,14 +116,14 @@ function updateCircleColor(button, classProperty) {
 function createCurrentActivity() {
   addClassProperty(newActivitySection, 'hidden');
   removeClassProperty(currentActivitySection, 'hidden');
-  var buttons = document.querySelectorAll('.cat-button')
   var classList = ['study', 'meditate', 'exercise'];
-  for (var i = 0; i < buttons.length; i++) {
-    updateCircleColor(buttons[i], classList[i]);
+  for (var i = 0; i < catButtons.length; i++) {
+    updateCircleColor(catButtons[i], classList[i]);
   }
 }
 
 function createInstance(activeClass) {
+  var buttonText = document.querySelectorAll('.cat-titles');
   for (var i = 0; i < buttonText.length; i++) {
     if (buttonText[i].parentNode.classList.contains(activeClass)) {
       currentActivity = new Activity (
@@ -164,27 +162,17 @@ function displayTimeSection() {
   currentActivity.seconds < 10 ? displaySec.innerText = `0${currentActivity.seconds}` : displaySec.innerText = currentActivity.seconds;
 }
 
-// TODO: We tried a FOR LOOP here. Is there any better way to do this?
-// for loop of errorMsg and push using ++ and return empty array. if array.length
-// is 0, call the functions.
 function startActivity() {
   var inputs = [accomplishInput, minutesInput, secondsInput];
   isCatChosen(studyButton, meditateButton, exerciseButton);
   areInputsDefined(inputs);
   var errorMessages = 0;
-  // debugger
   for (var i = 0; i < errorMsg.length; i++) {
     if (errorMsg[i].classList.contains('hidden')) {
       errorMessages += 1;
     }
-    //return errorMessages;
   }
-  if (errorMessages >= 4) {
-
-  // if (errorMsg[0].classList.contains('hidden') &&
-  // errorMsg[1].classList.contains('hidden') &&
-  // errorMsg[2].classList.contains('hidden') &&
-  // errorMsg[3].classList.contains('hidden')) {
+  if (errorMessages >= errorMsg.length) {
     createCurrentActivity();
     displayTimeSection();
   }
@@ -262,18 +250,22 @@ function clearTimerSection() {
   removeClassProperty(displayUserTimer, 'hidden');
 }
 
-// EASY TODO: could make it a for loop
 function clearCatButtonSection() {
-buttonText[0].parentNode.classList.remove('study-active');
-buttonText[1].parentNode.classList.remove('meditate-active');
-buttonText[2].parentNode.classList.remove('exercise-active');
+  var buttonNames = ['study-active', 'meditate-active', 'exercise-active']
+  for (var i = 0; i < catButtons.length; i++) {
+    removeClassProperty(catButtons[i], buttonNames[i]);
+  }
 }
 
 // TODO: could do a queryALL to refactor
 function clearUserInputsSection() {
-  accomplishInput.value = '';
-  minutesInput.value = '';
-  secondsInput.value = '';
+  var inputs = document.querySelectorAll('input');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+  }
+  // accomplishInput.value = '';
+  // minutesInput.value = '';
+  // secondsInput.value = '';
 }
 
 function clearStartCircleColor() {
