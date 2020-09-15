@@ -12,7 +12,6 @@ var createNewActivityBtn = document.querySelector('.new-activity-button');
 var accomplishInput = document.querySelector('.accomplish-input');
 var minutesInput = document.querySelector('.minutes-input');
 var secondsInput = document.querySelector('.seconds-input');
-//var buttonText = document.querySelectorAll('.cat-titles')
 var newActivitySection = document.querySelector('.new');
 var currentActivitySection = document.querySelector('.current');
 var cardSection = document.querySelector('.card-section');
@@ -23,6 +22,7 @@ var displayMin = document.getElementById('user-minutes');
 var displaySec = document.getElementById('user-seconds');
 var congratMsg = document.querySelector('.message');
 var displayUserTimer = document.querySelector('.user-timer');
+var inputs = document.querySelectorAll('input');
 
 studyButton.addEventListener('click', changeStudyColor);
 meditateButton.addEventListener('click', changeMeditateColor);
@@ -163,7 +163,6 @@ function displayTimeSection() {
 }
 
 function startActivity() {
-  var inputs = [accomplishInput, minutesInput, secondsInput];
   isCatChosen(studyButton, meditateButton, exerciseButton);
   areInputsDefined(inputs);
   var errorMessages = 0;
@@ -257,15 +256,10 @@ function clearCatButtonSection() {
   }
 }
 
-// TODO: could do a queryALL to refactor
 function clearUserInputsSection() {
-  var inputs = document.querySelectorAll('input');
   for (var i = 0; i < inputs.length; i++) {
     inputs[i].value = '';
   }
-  // accomplishInput.value = '';
-  // minutesInput.value = '';
-  // secondsInput.value = '';
 }
 
 function clearStartCircleColor() {
