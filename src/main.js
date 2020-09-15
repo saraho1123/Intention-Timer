@@ -171,10 +171,20 @@ function startActivity() {
   var inputs = [accomplishInput, minutesInput, secondsInput];
   isCatChosen(studyButton, meditateButton, exerciseButton);
   areInputsDefined(inputs);
-  if (errorMsg[0].classList.contains('hidden') &&
-  errorMsg[1].classList.contains('hidden') &&
-  errorMsg[2].classList.contains('hidden') &&
-  errorMsg[3].classList.contains('hidden')) {
+  var errorMessages = 0;
+  // debugger
+  for (var i = 0; i < errorMsg.length; i++) {
+    if (errorMsg[i].classList.contains('hidden')) {
+      errorMessages += 1;
+    }
+    //return errorMessages;
+  }
+  if (errorMessages >= 4) {
+
+  // if (errorMsg[0].classList.contains('hidden') &&
+  // errorMsg[1].classList.contains('hidden') &&
+  // errorMsg[2].classList.contains('hidden') &&
+  // errorMsg[3].classList.contains('hidden')) {
     createCurrentActivity();
     displayTimeSection();
   }
