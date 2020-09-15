@@ -36,53 +36,59 @@ createNewActivityBtn.addEventListener('click', createNewActivity);
 
 // TODO: consider breaking into 2 to reduce number of params?
 // NOTE: the button/category params alwasy come in a pair.
-function changeColor(button1, category1, button2, category2, button3, category3) {
-    if (button2 == undefined) {
-        button1.classList.add(category1);
-    } else if (button3 == undefined) {
-        button1.classList.add(category1);
-        button2.classList.remove(category2);
-    } else {
-        button1.classList.add(category1);
-        button2.classList.remove(category2);
-        button3.classList.remove(category3);
-    }
+
+function addClassProperty(button1, category1, button2, category2) {
+  if (!button2) {
+    button1.classList.add(category1);
+  } else {
+    button1.classList.add(category1);
+    button2.classList.add(category2);
+  }
 }
 
-// TODO: refactoring changeColor would effect this one.
+function removeClassProperty(button1, category1, button2, category2) {
+  if (!button2) {
+    button1.classList.remove(category1);
+  } else {
+    button1.classList.remove(category1);
+    button2.classList.remove(category2);
+  }
+}
+
 function changeStudyColor() {
-    changeColor(studyButton, 'study-active', meditateButton, 'meditate-active', exerciseButton, 'exercise-active');
-    isCatChosen(studyButton, meditateButton, exerciseButton);
+  addClassProperty(studyButton, 'study-active');
+  removeClassProperty(meditateButton, 'meditate-active', exerciseButton, 'exercise-active')
+  isCatChosen(studyButton, meditateButton, exerciseButton);
   }
 
-// TODO: refactoring changeColor would effect this one.
 function changeMeditateColor() {
-    changeColor(meditateButton, 'meditate-active', studyButton, 'study-active', exerciseButton, 'exercise-active');
-    isCatChosen(studyButton, meditateButton, exerciseButton);
+  addClassProperty(meditateButton, 'meditate-active');
+  removeClassProperty(studyButton, 'study-active', exerciseButton, 'exercise-active');
+  isCatChosen(studyButton, meditateButton, exerciseButton);
   }
 
-// TODO: refactoring changeColor would effect this one.
 function changeExerciseColor() {
-    changeColor(exerciseButton, 'exercise-active', studyButton, 'study-active', meditateButton, 'meditate-active');
-    isCatChosen(studyButton, meditateButton, exerciseButton);
+  addClassProperty(exerciseButton, 'exercise-active');
+  removeClassProperty(studyButton, 'study-active', meditateButton, 'meditate-active');
+  isCatChosen(studyButton, meditateButton, exerciseButton);
   }
 
 function limitTimeInput(timeInput, num) {
   preventInvalids(event, timeInput);
   timeInput.value = parseInt(timeInput.value);
   if (timeInput.value > num) {
-      timeInput.value = num;
+    timeInput.value = num;
   }
 }
 
 function preventInvalids(event, inputField) {
-    var invalidChars = ['+', '-', 'e', 'E'];
-    for (var i = 0; i < invalidChars.length; i++) {
-        if (event.key === invalidChars[i]) {
-            event.preventDefault();
-            inputField.value = '';
-        }
+  var invalidChars = ['+', '-', 'e', 'E'];
+  for (var i = 0; i < invalidChars.length; i++) {
+    if (event.key === invalidChars[i]) {
+      event.preventDefault();
+      inputField.value = '';
     }
+  }
 }
 
 function limitAccomplish() {
@@ -100,31 +106,31 @@ function limitSec() {
 }
 
 function createCurrentActivity() {
-    changeColor(newActivitySection,'hidden', currentActivitySection, 'hidden');
-    if (studyButton.classList.contains('study-active')) {
-        createInstance('study-active');
-        changeColor(startButton,'study-circle');
-    } else if (meditateButton.classList.contains('meditate-active')) {
-        createInstance('meditate-active');
-        changeColor(startButton,'meditate-circle');
-    } else if (exerciseButton.classList.contains('exercise-active')) {
-        createInstance('exercise-active');
-        changeColor(startButton,'exercise-circle');
-    }
-
+  addClassProperty(newActivitySection,'hidden')
+  removeClassProperty(currentActivitySection, 'hidden')
+  if (studyButton.classList.contains('study-active')) {
+    createInstance('study-active');
+    addClassProperty(startButton,'study-circle');
+  } else if (meditateButton.classList.contains('meditate-active')) {
+    createInstance('meditate-active');
+    addClassProperty(startButton,'meditate-circle');
+  } else if (exerciseButton.classList.contains('exercise-active')) {
+    createInstance('exercise-active');
+    addClassProperty(startButton,'exercise-circle');
+  }
 }
 
 function createInstance(activeClass) {
-    for (var i = 0; i < buttonText.length; i++) {
-        if (buttonText[i].parentNode.classList.contains(activeClass)) {
-            currentActivity = new Activity (
-                buttonText[i].innerText,
-                accomplishInput.value,
-                minutesInput.value,
-                secondsInput.value
-                );
-        }
+  for (var i = 0; i < buttonText.length; i++) {
+    if (buttonText[i].parentNode.classList.contains(activeClass)) {
+      currentActivity = new Activity (
+        buttonText[i].innerText,
+        accomplishInput.value,
+        minutesInput.value,
+        secondsInput.value
+        );
     }
+  }
 }
 
 function isCatChosen(btn1, btn2, btn3) {
@@ -156,9 +162,9 @@ function areInputsDefined(userInputs, errorMsgIndex) {
 }
 
 function displayTimeSection() {
-    document.getElementById('user-accomplish').innerText = currentActivity.description;
-    currentActivity.minutes < 10 ? displayMin.innerText = `0${currentActivity.minutes}` : displayMin.innerText = currentActivity.minutes;
-    currentActivity.seconds < 10 ? displaySec.innerText = `0${currentActivity.seconds}` : displaySec.innerText = currentActivity.seconds;
+  document.getElementById('user-accomplish').innerText = currentActivity.description;
+  currentActivity.minutes < 10 ? displayMin.innerText = `0${currentActivity.minutes}` : displayMin.innerText = currentActivity.minutes;
+  currentActivity.seconds < 10 ? displaySec.innerText = `0${currentActivity.seconds}` : displaySec.innerText = currentActivity.seconds;
 }
 
 // TODO: We tried a FOR LOOP here. Is there any better way to do this?
@@ -177,9 +183,9 @@ function startActivity() {
   }
 }
 
-// TODO: refactoring changeColor would effect this one.
 function displayCongratMsg(msg) {
-  changeColor(displayUserTimer, 'hidden', congratMsg, 'hidden');
+  addClassProperty(displayUserTimer, 'hidden');
+  removeClassProperty(congratMsg, 'hidden');
   congratMsg.innerText = msg;
 }
 
@@ -235,26 +241,25 @@ function returnFromLocalStorage() {
   }
 }
 
-// TODO: refactoring changeColor would effect this one.
 function logActivity() {
   currentActivity.saveToStorage(currentActivity);
-  changeColor(emptyLogSection, 'hidden', cardSection, 'hidden');
-  changeColor(currentActivitySection, 'hidden', completedActivitySection, 'hidden');
+  addClassProperty(emptyLogSection, 'hidden', currentActivitySection, 'hidden');
+  removeClassProperty(cardSection, 'hidden', completedActivitySection, 'hidden');
   returnFromLocalStorage();
 }
 
-// TODO: refactoring changeColor would effect this one.
 function clearTimerSection() {
   startButton.innerText = 'START';
   startButton.disabled = false;
-  changeColor(congratMsg, 'hidden', displayUserTimer, 'hidden');
+  addClassProperty(congratMsg, 'hidden');
+  removeClassProperty(displayUserTimer, 'hidden');
 }
 
 // EASY TODO: could make it a for loop
 function clearCatButtonSection() {
-    buttonText[0].parentNode.classList.remove('study-active');
-    buttonText[1].parentNode.classList.remove('meditate-active');
-    buttonText[2].parentNode.classList.remove('exercise-active');
+buttonText[0].parentNode.classList.remove('study-active');
+buttonText[1].parentNode.classList.remove('meditate-active');
+buttonText[2].parentNode.classList.remove('exercise-active');
 }
 
 // TODO: could do a queryALL to refactor
@@ -271,20 +276,19 @@ function clearStartCircleColor() {
     }
 }
 
-// TODO: refactoring changeColor would effect this one.
 function createNewActivity() {
   clearCatButtonSection();
   clearUserInputsSection();
   clearTimerSection();
   clearStartCircleColor();
-  changeColor(logButton, 'hidden')
-  changeColor(completedActivitySection, 'hidden', newActivitySection, 'hidden');
+  addClassProperty(logButton, 'hidden', completedActivitySection, 'hidden');
+  removeClassProperty(newActivitySection, 'hidden');
 }
 
-// TODO: refactoring changeColor would effect this one.
 function displayCardsOnLoad() {
   if (localStorage.length > 0) {
-    changeColor(emptyLogSection, 'hidden', cardSection, 'hidden');
+    addClassProperty(emptyLogSection, 'hidden');
+    removeClassProperty(cardSection, 'hidden');
     returnFromLocalStorage();
   }
 }
