@@ -44,7 +44,7 @@ article {
   width: 40%;
 }
 
-.cat-button {
+.category-button {
   width: 11em;
   height: 5em;
   background: transparent;
@@ -100,7 +100,7 @@ article {
   justify-content: space-between;
 }
 
-.cat-titles {
+.category-titles {
   margin-top: 3em;
 }
 

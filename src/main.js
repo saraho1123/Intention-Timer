@@ -4,7 +4,7 @@ var pastActivities = [];
 var studyButton = document.querySelector('.study');
 var meditateButton = document.querySelector('.meditate');
 var exerciseButton = document.querySelector('.exercise');
-var catButtons = document.querySelectorAll('.cat-button')
+var categoryButtons = document.querySelectorAll('.category-button')
 var startButton = document.querySelector('.start-button');
 var startActivityBtn = document.querySelector('.start-activity-button');
 var logButton = document.getElementById('log-button');
@@ -35,6 +35,14 @@ startButton.addEventListener('click', startCountDown);
 logButton.addEventListener('click', logActivity);
 createNewActivityBtn.addEventListener('click', createNewActivity);
 
+function changeClassProperty(element) {
+  for (var i = 0; i < element.length; i++) {
+    element[i].add?
+    (element[i].btn).classList.add(element[i].classProperty):
+    (element[i].btn).classList.remove(element[i].classProperty)
+  }
+}
+
 function addClassProperty(button1, category1, button2, category2) {
   if (!button2) {
     button1.classList.add(category1);
@@ -52,24 +60,30 @@ function removeClassProperty(button1, category1, button2, category2) {
     button2.classList.remove(category2);
   }
 }
-
+//{btn: , classProperty: , add: }
 function changeStudyColor() {
-  addClassProperty(studyButton, 'study-active');
-  removeClassProperty(meditateButton, 'meditate-active', exerciseButton, 'exercise-active')
-  isCatChosen(studyButton, meditateButton, exerciseButton);
-  }
+  var properties = [
+  {btn: studyButton, classProperty: 'study-active', add: true},
+  {btn: meditateButton, classProperty: 'meditate-active', add: false},
+  {btn: exerciseButton, classProperty: 'exercise-active', add: false}
+  ];
+  changeClassProperty(properties);
+  //addClassProperty(studyButton, 'study-active');
+  //removeClassProperty(meditateButton, 'meditate-active', exerciseButton, 'exercise-active')
+  isCatChosen(categoryButtons);
+}
 
 function changeMeditateColor() {
   addClassProperty(meditateButton, 'meditate-active');
   removeClassProperty(studyButton, 'study-active', exerciseButton, 'exercise-active');
-  isCatChosen(studyButton, meditateButton, exerciseButton);
-  }
+  isCatChosen(categoryButtons);
+}
 
 function changeExerciseColor() {
   addClassProperty(exerciseButton, 'exercise-active');
   removeClassProperty(studyButton, 'study-active', meditateButton, 'meditate-active');
-  isCatChosen(studyButton, meditateButton, exerciseButton);
-  }
+  isCatChosen(categoryButtons);
+}
 
 function limitTimeInput(timeInput, num) {
   preventInvalids(event, timeInput);
@@ -88,10 +102,12 @@ function preventInvalids(event, inputField) {
     }
   }
 }
+
 function updateErrorMsg(userInput, errorMsgIndex) {
   userInput.value ? 
   addClassProperty(errorMsg[errorMsgIndex], 'hidden') : removeClassProperty(errorMsg[errorMsgIndex], 'hidden');
 }
+
 function limitAccomplish() {
   updateErrorMsg(accomplishInput, 1);
 }
@@ -113,21 +129,27 @@ function updateCircleColor(button, classProperty) {
   }
 }
 
-function createCurrentActivity() {
+function displayTimeSection() {
+  document.getElementById('user-accomplish').innerText = currentActivity.description;
+  displayMin.innerText = currentActivity.minutes < 10 ?   `0${currentActivity.minutes}` : currentActivity.minutes;
+  displaySec.innerText = currentActivity.seconds < 10 ?  `0${currentActivity.seconds}` : currentActivity.seconds;
+}
+
+function displayCurrentActivitySection() {
   addClassProperty(newActivitySection, 'hidden');
   removeClassProperty(currentActivitySection, 'hidden');
   var classList = ['study', 'meditate', 'exercise'];
-  for (var i = 0; i < catButtons.length; i++) {
-    updateCircleColor(catButtons[i], classList[i]);
+  for (var i = 0; i < categoryButtons.length; i++) {
+    updateCircleColor(categoryButtons[i], classList[i]);
   }
 }
 
 function createInstance(activeClass) {
-  var buttonText = document.querySelectorAll('.cat-titles');
-  for (var i = 0; i < buttonText.length; i++) {
-    if (buttonText[i].parentNode.classList.contains(activeClass)) {
+  var categoryButtonsNames = document.querySelectorAll('.category-titles');
+  for (var i = 0; i < categoryButtonsNames.length; i++) {
+    if (categoryButtonsNames[i].parentNode.classList.contains(activeClass)) {
       currentActivity = new Activity (
-        buttonText[i].innerText,
+        categoryButtonsNames[i].innerText,
         accomplishInput.value,
         minutesInput.value,
         secondsInput.value
@@ -136,13 +158,14 @@ function createInstance(activeClass) {
   }
 }
 
-function isCatChosen(btn1, btn2, btn3) {
-  if (!btn1.classList.contains('study-active') &&
-  !btn2.classList.contains('meditate-active') &&
-  !btn3.classList.contains('exercise-active')) {
-    errorMsg[0].classList.remove('hidden');
-  } else {
-    errorMsg[0].classList.add('hidden');
+function isCatChosen(btns) {
+  var classProperties = ['study', 'meditate', 'exercise'];
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].classList.contains(`${classProperties[i]}-active`)) {
+      return errorMsg[0].classList.add('hidden')
+    } else {
+      errorMsg[0].classList.remove('hidden');
+    }
   }
 }
 
@@ -156,14 +179,8 @@ function areInputsDefined(userInputs) {
   }
 }
 
-function displayTimeSection() {
-  document.getElementById('user-accomplish').innerText = currentActivity.description;
-  currentActivity.minutes < 10 ? displayMin.innerText = `0${currentActivity.minutes}` : displayMin.innerText = currentActivity.minutes;
-  currentActivity.seconds < 10 ? displaySec.innerText = `0${currentActivity.seconds}` : displaySec.innerText = currentActivity.seconds;
-}
-
 function startActivity() {
-  isCatChosen(studyButton, meditateButton, exerciseButton);
+  isCatChosen(categoryButtons);
   areInputsDefined(inputs);
   var errorMessages = 0;
   for (var i = 0; i < errorMsg.length; i++) {
@@ -172,7 +189,7 @@ function startActivity() {
     }
   }
   if (errorMessages >= errorMsg.length) {
-    createCurrentActivity();
+    displayCurrentActivitySection();
     displayTimeSection();
   }
 }
@@ -199,8 +216,8 @@ function startCountDown() {
       totalSeconds--
       var minutes = Math.floor(totalSeconds / 60);
       var seconds = Math.floor(totalSeconds % 60);
-      minutes < 10 ?  displayMin.innerText = `0${minutes}` : displayMin.innerText = minutes;
-      seconds < 10 ?  displaySec.innerText = `0${seconds}` : displaySec.innerText = seconds;
+      displayMin.innerText = minutes < 10 ? `0${minutes}` : minutes;
+      displaySec.innerText = seconds < 10 ? `0${seconds}` : seconds;
       if (totalSeconds <= 0) {
         clearInterval(interval);
         endCountDown();
@@ -209,11 +226,18 @@ function startCountDown() {
   }
 }
 
-// TODO: take another look at this one to refactor.
 function returnFromLocalStorage() {
   pastActivities = JSON.parse(localStorage.getItem('userActivities'))
   cardSection.innerHTML = ""
   for (var i = 0; i < pastActivities.length; i++) {
+    var color;
+    if (pastActivities[i].category === 'Study') {
+      color = '#B3FD78';
+    } else if (pastActivities[i].category === 'Meditate') {
+      color = '#C278FD'
+    } else if (pastActivities[i].category === 'Exercise') {
+      color = '#FD8078';
+    }
     cardSection.innerHTML +=
       `<section class="new-card">
         <div class="card">
@@ -221,17 +245,8 @@ function returnFromLocalStorage() {
           <h5 class="card card-time">${pastActivities[i].minutes} MIN ${pastActivities[i].seconds} SECONDS</h5>
           <h5 class="card card-accomplish">${pastActivities[i].description}</h5>
         </div>
-        <div class="card-border">
-        </div>
+        <div class="card-border" style="background-color:${[color]}"></div>
       </section>`
-    var cardBorder = document.querySelectorAll('.card-border');
-    if (pastActivities[i].category === 'Study') {
-      cardBorder[cardBorder.length-1].style.backgroundColor = '#B3FD78';
-    } else if (pastActivities[i].category === 'Meditate') {
-      cardBorder[cardBorder.length-1].style.backgroundColor = '#C278FD';
-    } else if (pastActivities[i].category === 'Exercise') {
-      cardBorder[cardBorder.length-1].style.backgroundColor = '#FD8078';
-    }
   }
 }
 
@@ -249,10 +264,11 @@ function clearTimerSection() {
   removeClassProperty(displayUserTimer, 'hidden');
 }
 
-function clearCatButtonSection() {
-  var buttonNames = ['study-active', 'meditate-active', 'exercise-active']
-  for (var i = 0; i < catButtons.length; i++) {
-    removeClassProperty(catButtons[i], buttonNames[i]);
+function clearCategoryColor() {
+  var buttonNames = ['study', 'meditate', 'exercise']
+  for (var i = 0; i < categoryButtons.length; i++) {
+    removeClassProperty(categoryButtons[i], `${buttonNames[i]}-active`);
+    removeClassProperty(startButton, `${buttonNames[i]}-circle`);
   }
 }
 
@@ -262,18 +278,10 @@ function clearUserInputsSection() {
   }
 }
 
-function clearStartCircleColor() {
-  var circleColor= ['study-circle', 'meditate-circle', 'exercise-circle']
-    for (var i = 0; i < circleColor.length; i++) {
-      startButton.classList.remove(circleColor[i]);
-    }
-}
-
 function createNewActivity() {
-  clearCatButtonSection();
+  clearCategoryColor();
   clearUserInputsSection();
   clearTimerSection();
-  clearStartCircleColor();
   addClassProperty(logButton, 'hidden', completedActivitySection, 'hidden');
   removeClassProperty(newActivitySection, 'hidden');
 }
