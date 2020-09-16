@@ -187,17 +187,17 @@ function startActivity() {
   }
 }
 
-function displayCongratMsg(msg) {
+function displayCongratMsg() {
   var congratsMessages = [
     {name: displayUserTimer, classProperty: 'hidden', add: true},
     {name: congratMsg, classProperty: 'hidden', add: false}
   ];
   changeClassProperty(congratsMessages);
-  congratMsg.innerText = msg;
+  // congratMsg.innerText = msg;
 }
 
 function endCountDown() {
-  displayCongratMsg('Congrats!!! Great Job!!! 😍🤢🌿☘️🍀🧚🏿‍♀️🧞‍♂️🧜🏿‍♂️🧛🏻‍♂️');
+  displayCongratMsg();
   startButton.innerText = 'COMPLETE';
   logButton.classList.remove('hidden');
   currentActivity.markComplete();
