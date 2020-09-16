@@ -38,8 +38,8 @@ createNewActivityBtn.addEventListener('click', createNewActivity);
 function changeClassProperty(element) {
   for (var i = 0; i < element.length; i++) {
     element[i].add?
-    (element[i].btn).classList.add(element[i].classProperty):
-    (element[i].btn).classList.remove(element[i].classProperty)
+    (element[i].name).classList.add(element[i].classProperty):
+    (element[i].name).classList.remove(element[i].classProperty)
   }
 }
 
@@ -60,12 +60,12 @@ function removeClassProperty(button1, category1, button2, category2) {
     button2.classList.remove(category2);
   }
 }
-//{btn: , classProperty: , add: }
+
 function changeStudyColor() {
   var properties = [
-  {btn: studyButton, classProperty: 'study-active', add: true},
-  {btn: meditateButton, classProperty: 'meditate-active', add: false},
-  {btn: exerciseButton, classProperty: 'exercise-active', add: false}
+  {name: studyButton, classProperty: 'study-active', add: true},
+  {name: meditateButton, classProperty: 'meditate-active', add: false},
+  {name: exerciseButton, classProperty: 'exercise-active', add: false}
   ];
   changeClassProperty(properties);
   //addClassProperty(studyButton, 'study-active');
@@ -74,14 +74,26 @@ function changeStudyColor() {
 }
 
 function changeMeditateColor() {
-  addClassProperty(meditateButton, 'meditate-active');
-  removeClassProperty(studyButton, 'study-active', exerciseButton, 'exercise-active');
+  var properties = [
+  {name: studyButton, classProperty: 'study-active', add: false},
+  {name: meditateButton, classProperty: 'meditate-active', add: true},
+  {name: exerciseButton, classProperty: 'exercise-active', add: false}
+  ];
+  changeClassProperty(properties);
+  // addClassProperty(meditateButton, 'meditate-active');
+  // removeClassProperty(studyButton, 'study-active', exerciseButton, 'exercise-active');
   isCatChosen(categoryButtons);
 }
 
 function changeExerciseColor() {
-  addClassProperty(exerciseButton, 'exercise-active');
-  removeClassProperty(studyButton, 'study-active', meditateButton, 'meditate-active');
+  var properties = [
+  {name: studyButton, classProperty: 'study-active', add: false},
+  {name: meditateButton, classProperty: 'meditate-active', add: false},
+  {name: exerciseButton, classProperty: 'exercise-active', add: true}
+  ];
+  changeClassProperty(properties);
+  // addClassProperty(exerciseButton, 'exercise-active');
+  // removeClassProperty(studyButton, 'study-active', meditateButton, 'meditate-active');
   isCatChosen(categoryButtons);
 }
 
@@ -104,8 +116,10 @@ function preventInvalids(event, inputField) {
 }
 
 function updateErrorMsg(userInput, errorMsgIndex) {
-  userInput.value ? 
-  addClassProperty(errorMsg[errorMsgIndex], 'hidden') : removeClassProperty(errorMsg[errorMsgIndex], 'hidden');
+  var displayErrorMsg = [{name: errorMsg[errorMsgIndex], classProperty: 'hidden', add: false}];
+  var removeErrorMsg = [{name: errorMsg[errorMsgIndex], classProperty: 'hidden', add: true}];
+  userInput.value ? changeClassProperty(removeErrorMsg) : changeClassProperty(displayErrorMsg);
+  // addClassProperty(errorMsg[errorMsgIndex], 'hidden') : removeClassProperty(errorMsg[errorMsgIndex], 'hidden');
 }
 
 function limitAccomplish() {
@@ -122,10 +136,12 @@ function limitSec() {
   updateErrorMsg(secondsInput, 3);
 }
 
-function updateCircleColor(button, classProperty) { 
+function updateCircleColor(button, classProperty) {
+  var circleColor = [{name: startButton, classProperty: `${classProperty}-circle`, add: true}];
   if (button.classList.contains(`${classProperty}-active`)) {
     createInstance(`${classProperty}-active`);
-    addClassProperty(startButton, `${classProperty}-circle`);
+    changeClassProperty(circleColor);
+    // addClassProperty(startButton, `${classProperty}-circle`);
   }
 }
 
@@ -136,8 +152,13 @@ function displayTimeSection() {
 }
 
 function displayCurrentActivitySection() {
-  addClassProperty(newActivitySection, 'hidden');
-  removeClassProperty(currentActivitySection, 'hidden');
+  var activitySections = [
+    {name: newActivitySection, classProperty: 'hidden', add: true},
+    {name: currentActivitySection, classProperty: 'hidden', add: false}
+  ];
+  changeClassProperty(activitySections);
+  // addClassProperty(newActivitySection, 'hidden');
+  // removeClassProperty(currentActivitySection, 'hidden');
   var classList = ['study', 'meditate', 'exercise'];
   for (var i = 0; i < categoryButtons.length; i++) {
     updateCircleColor(categoryButtons[i], classList[i]);
@@ -195,8 +216,13 @@ function startActivity() {
 }
 
 function displayCongratMsg(msg) {
-  addClassProperty(displayUserTimer, 'hidden');
-  removeClassProperty(congratMsg, 'hidden');
+  var congratsMessages = [
+    {name: displayUserTimer, classProperty: 'hidden', add: true},
+    {name: congratMsg, classProperty: 'hidden', add: false}
+  ];
+  changeClassProperty(congratsMessages);
+  // addClassProperty(displayUserTimer, 'hidden');
+  // removeClassProperty(congratMsg, 'hidden');
   congratMsg.innerText = msg;
 }
 
@@ -252,16 +278,28 @@ function returnFromLocalStorage() {
 
 function logActivity() {
   currentActivity.saveToStorage(currentActivity);
-  addClassProperty(emptyLogSection, 'hidden', currentActivitySection, 'hidden');
-  removeClassProperty(cardSection, 'hidden', completedActivitySection, 'hidden');
+  var sectionsToSwitch = [
+    {name: emptyLogSection, classProperty: 'hidden', add: true},
+    {name: currentActivitySection, classProperty: 'hidden', add: true},
+    {name: cardSection, classProperty: 'hidden', add: false},
+    {name: completedActivitySection, classProperty: 'hidden', add: false}
+  ];
+  changeClassProperty(sectionsToSwitch);
+  // addClassProperty(emptyLogSection, 'hidden', currentActivitySection, 'hidden');
+  // removeClassProperty(cardSection, 'hidden', completedActivitySection, 'hidden');
   returnFromLocalStorage();
 }
 
 function clearTimerSection() {
   startButton.innerText = 'START';
   startButton.disabled = false;
-  addClassProperty(congratMsg, 'hidden');
-  removeClassProperty(displayUserTimer, 'hidden');
+  var sectionsToClear = [
+    {name: congratMsg, classProperty: 'hidden', add: true},
+    {name: displayUserTimer, classProperty: 'hidden', add: false}
+  ];
+  changeClassProperty(sectionsToClear);
+  // addClassProperty(congratMsg, 'hidden');
+  // removeClassProperty(displayUserTimer, 'hidden');
 }
 
 function clearCategoryColor() {
@@ -282,14 +320,25 @@ function createNewActivity() {
   clearCategoryColor();
   clearUserInputsSection();
   clearTimerSection();
-  addClassProperty(logButton, 'hidden', completedActivitySection, 'hidden');
-  removeClassProperty(newActivitySection, 'hidden');
+  var sectionsToSwitch = [
+    {name: logButton, classProperty: 'hidden', add: true},
+    {name: completedActivitySection, classProperty: 'hidden', add: true},
+    {name: newActivitySection, classProperty: 'hidden', add: false},
+  ];
+  changeClassProperty(sectionsToSwitch);
+  // addClassProperty(logButton, 'hidden', completedActivitySection, 'hidden');
+  // removeClassProperty(newActivitySection, 'hidden');
 }
 
 function displayCardsOnLoad() {
   if (localStorage.length > 0) {
-    addClassProperty(emptyLogSection, 'hidden');
-    removeClassProperty(cardSection, 'hidden');
+    var sectionsToSwitch = [
+      {name: emptyLogSection, classProperty: 'hidden', add: true},
+      {name: cardSection, classProperty: 'hidden', add: false},
+    ];
+    changeClassProperty(sectionsToSwitch);
+    // addClassProperty(emptyLogSection, 'hidden');
+    // removeClassProperty(cardSection, 'hidden');
     returnFromLocalStorage();
   }
 }
