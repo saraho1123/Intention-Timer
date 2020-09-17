@@ -25,9 +25,13 @@ Making our code SRP and DRY is something we could still improve upon.
 We enjoyed building it and working together. We used the timer to actually dictate our breaks while working through the project. We made our code more dynamic, as well as spending plenty of time refactoring.
 
 ## ScreenShots
-![image of timer display](/README_assets/Screen Shot 2020-09-16 at 5.39.20 PM.png)<br />
+Display time in double digits:
+![image of timer display](/README_assets/display-double-digits-timer.png)<br />
 
+Shows functionalities of the app including warning messages:
 ![gif of Functionality](/README_assets/functionality-and-warning-messages.gif)<br />
+
+Shows limiting time inputs to numbers only, and local storage:
 ![gif of Local Storage](/README_assets/invalid-characters-and-local-storage.gif)<br />
 
 ## Credits
